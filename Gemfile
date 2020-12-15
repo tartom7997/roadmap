@@ -72,3 +72,7 @@ end
 
 # japanese
 gem 'rb-readline'
+
+gem 'nokogiri'
+
+gem 'bootstrap-sass'
