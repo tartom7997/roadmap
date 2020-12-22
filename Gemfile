@@ -76,3 +76,5 @@ gem 'rb-readline'
 gem 'nokogiri'
 
 gem 'bootstrap-sass'
+
+gem 'bcrypt'
