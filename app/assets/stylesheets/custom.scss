@@ -189,7 +189,6 @@ input {
   background:url(top_road.png) center no-repeat; background-size: cover;
   padding: 180px 0px 180px 0px;
   color: white;
-  height: 90vh;
 }
 
 /* ②Bootstrapの既存設定の初期化 20201230*/
@@ -201,5 +200,5 @@ input {
 
 /* ③JumbotronのみへのMargin調整 20201230*/
 .container-fluid { 
-  margin: -130px -80px -70px -80px;
+  margin: -130px -100px -70px -80px;
 } 
