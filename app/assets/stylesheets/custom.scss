@@ -24,7 +24,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
+  padding-top: 180px;
 }
 
 section {
@@ -84,6 +84,13 @@ p {
     color: #fff;
     text-decoration: none;
   }
+}
+
+/* header Bootstrap-black カラー変更 20201230 */
+
+.navbar-inverse {
+  background-color: #004458;
+  border-color: #004458;
 }
 
 /* footer */
@@ -176,3 +183,23 @@ input {
     color: $state-danger-text;
   }
 }
+
+/* ①背景設定 20201230*/ 
+.jumbotron-extend {
+  background:url(top_road.png) center no-repeat; background-size: cover;
+  padding: 180px 0px 180px 0px;
+  color: white;
+  height: 90vh;
+}
+
+/* ②Bootstrapの既存設定の初期化 20201230*/
+.container { 
+  width: 100%;
+  padding: auto;
+  margin: auto;
+} 
+
+/* ③JumbotronのみへのMargin調整 20201230*/
+.container-fluid { 
+  margin: -130px -80px -70px -80px;
+} 
