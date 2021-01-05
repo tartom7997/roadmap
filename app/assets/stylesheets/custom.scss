@@ -24,7 +24,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 180px;
+  padding-top: 60px;
 }
 
 section {
@@ -198,6 +198,18 @@ input {
   margin-left: 0;
 }
 
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
 /* ①背景設定 20201230*/ 
 .jumbotron-extend {
   background:url(top_road.png) center no-repeat; background-size: cover;
@@ -215,5 +227,5 @@ input {
 /* ③JumbotronのみへのMargin調整 20201230*/
 .container-fluid { 
   padding: 0px 0px;
-  margin: -130px -30px -70px -30px;
+  margin: -10px -30px -70px -30px;
 } 
