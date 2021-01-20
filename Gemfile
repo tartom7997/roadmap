@@ -12,6 +12,7 @@ group :development do
 end
 group :production do
   gem 'pg'
+  gem 'fog'
 end
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
@@ -83,3 +84,6 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'mail-iso-2022-jp'
+
+gem 'carrierwave'
+gem 'mini_magick'
