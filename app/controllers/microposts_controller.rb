@@ -9,7 +9,9 @@ class MicropostsController < ApplicationController
         redirect_to root_url
       else
         @feed_items = []
-        render 'static_pages/home'
+        # render 'static_pages/home'
+        flash[:danger] = "投稿に失敗しました。"
+        redirect_to root_url
       end
     end
   
@@ -19,7 +21,7 @@ class MicropostsController < ApplicationController
       # redirect_to request.referrer || root_url
       redirect_back(fallback_location: root_url)
     end
-  
+
     private
   
       def micropost_params

@@ -13,7 +13,9 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'input[type=file]'
     # 無効な送信
     post microposts_path, params: { micropost: { content: "" } }
-    assert_select 'div#error_explanation'
+    # assert_select 'div#error_explanation'
+    assert_equal "投稿に失敗しました。", flash[:danger]
+    follow_redirect!
     # 有効な送信
     content = "This micropost really ties the room together"
     picture = fixture_file_upload('test/fixtures/rails.png', 'image/png')

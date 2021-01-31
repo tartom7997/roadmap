@@ -19,5 +19,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
       assert_match micropost.content, response.body
     end
     assert_select 'div.pagination', count:1 #追加
+    assert_match @user.active_relationships.count.to_s, response.body
+    assert_match @user.passive_relationships.count.to_s, response.body
   end
 end

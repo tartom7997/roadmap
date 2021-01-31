@@ -210,13 +210,12 @@ GEM
       fog-core (~> 2.1)
       fog-json (>= 1.0)
       ipaddress (>= 0.8)
-    fog-ovirt (2.0.0)
+    fog-ovirt (2.0.1)
       activesupport
       fog-core
       fog-json
       fog-xml
       ovirt-engine-sdk (>= 4.3.1)
-      rbovirt (~> 0.1.5)
     fog-powerdns (0.2.0)
       fog-core
       fog-json
@@ -408,9 +407,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rb-readline (0.5.5)
-    rbovirt (0.1.7)
-      nokogiri
-      rest-client (> 1.7.0)
     rbvmomi (2.4.1)
       builder (~> 3.0)
       json (>= 1.8)
