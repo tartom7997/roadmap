@@ -44,4 +44,4 @@ yarn-debug.log*
 /spring/*.pid
 
 # アップロードされたテスト画像を無視する
-/public/uploads
+/public/uploadspublic/uploads
