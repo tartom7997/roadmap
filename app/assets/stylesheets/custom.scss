@@ -1,5 +1,6 @@
-@import "bootstrap-sprockets";
+// @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "reset";
 
 /* mixins, variables, etc. */
 
@@ -19,6 +20,7 @@ $gray-medium-light: #eaeaea;
   width: 100%;
   margin-top: 45px;
   @include box_sizing;
+  color: #F6F7F8;
 }
 
 /* universal */
@@ -42,6 +44,16 @@ textarea {
   }
 }
 
+.share-container {
+  background: #F6F7F8;
+  padding: 100px 180px 180px 180px;
+  margin-top: 100px;
+  color: #0C0C0C;
+  h1 {
+    color: #0C0C0C
+  }
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -53,15 +65,16 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+  color: #0C0C0C;
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777;
+  color: #0C0C0C;
 }
 
 p {
@@ -69,28 +82,37 @@ p {
   line-height: 1.7em;
 }
 
-/* header */
+/* btn */
 
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;  
-  &:hover {
-    color: #fff;
-    text-decoration: none;
-  }
+.btn-primary {
+  background: #68A5DA;
+  color: #F6F7F8;
 }
 
-/* header Bootstrap-black カラー変更 20201230 */
+.btn-secondary {
+  background: #F6F7F8;
+  color: #68A5DA;
+}
 
-.navbar-inverse {
-  background-color: #004458;
-  border-color: #004458;
+/* header */
+
+.header-container {
+ width: 100%;
+ padding: auto;
+ margin: auto;
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: space-between;
+}
+
+
+.navbar-brand {
+  display: block;
+  width: 150px;
+  height: 49px;
+  font-size: 0; 
+  background: url(growthmap_logo_02_mini.png) left top/150px auto no-repeat;
 }
 
 /* footer */
@@ -98,12 +120,12 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
+  border-top: 1px solid #F6F7F8;
+  color: #F6F7F8;
   a {
-    color: #555;
+    color: #F6F7F8;
     &:hover {
-      color: #222;
+      color: #68A5DA;
     }
   }
   small {
@@ -163,7 +185,7 @@ aside {
   a {
     float: left;
     padding: 0 10px;
-    border-left: 1px solid $gray-lighter;
+    border-left: 1px solid;
     color: gray;
     &:first-child {
       padding-left: 0;
@@ -171,7 +193,7 @@ aside {
     }
     &:hover {
       text-decoration: none;
-      color: blue;
+      color: 68A5DA;
     }
   }
   strong {
@@ -216,9 +238,8 @@ input {
 }
 
 .field_with_errors {
-  @extend .has-error;
   .form-control {
-    color: $state-danger-text;
+      @extend .is-invalid;
   }
 }
 
@@ -244,29 +265,87 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid #999
   }
 }
 
+/* Home */
+
 /* ①背景設定 20201230*/ 
 .jumbotron-extend {
-  background:url(top_road.png) center no-repeat; background-size: cover;
-  padding: 180px 0px 180px 0px;
-  color: white;
+  background:url(top_01.jpg) center no-repeat; background-size: cover;
+  padding: 250px 0px 200px 0px;
+  margin-bottom: 0;
+  color: #F6F7F8;
+  h1 {
+    color: #F6F7F8
+  }
 }
 
 /* ②Bootstrapの既存設定の初期化 20201230*/
-.container { 
-  width: 100%;
-  padding: auto;
-  margin: auto;
-} 
+// .container { 
+//   width: 100%;
+//   padding: auto;
+//   margin: auto;
+// } 
 
 /* ③JumbotronのみへのMargin調整 20201230*/
 .container-fluid { 
   padding: 0px 0px;
-  margin: -10px -30px -70px -30px;
+  margin: 0px 0px 0px 0px;
 } 
+
+.home__btn--create {
+  padding: 0px 0px 20px 0px;
+}
+
+.home__btn--login {
+  padding: 0px 0px 0px 0px;
+}
+
+.container-top-medium {
+  background:url(top_02.jpg) ;
+  background-size: cover;
+  padding: 250px 0px 250px 0px;
+}
+
+.col-md-8-top-discription {
+  padding: 30px 100px 30px 100px;
+  color: #F6F7F8;
+  p {
+    margin-bottom: 0px;
+  }
+  h1, h2 {
+    color: #F6F7F8
+  }
+}
+
+.container-top-bottom {
+  background:url(top_03c.jpg) center no-repeat; background-size: cover;
+  padding: 250px 0px 250px 0px;
+  margin-bottom: 0;
+  color: #F6F7F8;
+  h1 {
+    color: #F6F7F8
+  }
+}
+
+.container-top-end {
+  background:url(growthmap_logo_01.png) center no-repeat;
+  background-size: cover;
+  padding: 150px 0px 150px 0px;
+  margin: 0px 200px 0px 200px;
+}
+
+.home__btn--end {
+  text-align: center;
+  padding: 0px 0px 0px 0px;
+  margin: 30px 0px 0px 0px;
+}
+
+/* Help */
+
+
 
 /* microposts */
 
@@ -275,7 +354,7 @@ input {
   padding: 0;
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid #F6F7F8;
   }
   .user {
     margin-top: 5em;
@@ -290,7 +369,7 @@ input {
     }
   }
   .timestamp {
-    color: $gray-light;
+    color: #999;
     display: block;
     margin-left: 60px;
   }
