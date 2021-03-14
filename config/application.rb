@@ -18,7 +18,7 @@ module SampleApp
     # 認証トークンをremoteフォームに埋め込む
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
-    config.autoloader = :classic
+    # config.autoloader = :classic # https://stackoverflow.com/questions/57277351/rails-6-zeitwerknameerror-doesnt-load-class-from-module
 
   end
 end
