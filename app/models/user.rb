@@ -6,36 +6,40 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name:  "Relationship",
                                   foreign_key: "followed_id",
                                   dependent:   :destroy
- has_many :following, through: :active_relationships,  source: :followed
- has_many :followers, through: :passive_relationships, source: :follower
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email
+  before_save   :downcase_email, unless: :uid?
   before_create :create_activation_digest
-  validates :name,  presence: true, length: { maximum: 50 }
+  validates :name,  presence: true, unless: :uid?, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
+  validates :email, presence: true, unless: :uid?, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
+  # has_secure_password validations: false # https://qiita.com/tkr_ld/items/e38a5b92866f41087f57
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, unless: :uid?, length: { minimum: 6 }, allow_nil: true
+  validates :profile, unless: :uid?, length: { maximum: 250 }
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
 
-    # 渡された文字列のハッシュ値を返す
-    def User.digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                    BCrypt::Engine.cost
-      BCrypt::Password.create(string, cost: cost)
-    end
-  
-    # ランダムなトークンを返す
-    def User.new_token
-      SecureRandom.urlsafe_base64
-    end
-  
-    # 永続セッションのためにユーザーをデータベースに記憶する
-    def remember
-      self.remember_token = User.new_token
-      update_attribute(:remember_digest, User.digest(remember_token))
-    end
+  # 渡された文字列のハッシュ値を返す
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  # ランダムなトークンを返す
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  # 永続セッションのためにユーザーをデータベースに記憶する
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
   
   # トークンがダイジェストと一致したらtrueを返す
   def authenticated?(attribute, token)
@@ -44,10 +48,10 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-    # ユーザーのログイン情報を破棄する
-    def forget
-      update_attribute(:remember_digest, nil)
-    end
+  # ユーザーのログイン情報を破棄する
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
 
   # アカウントを有効にする
   def activate
@@ -116,17 +120,57 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-    private
+#auth hashからユーザ情報を取得
+#データベースにユーザが存在するならユーザ取得して情報更新する；存在しないなら新しいユーザを作成する
+def self.find_or_initialize_from_auth(auth)
+  provider = auth[:provider]
+  uid = auth[:uid]
+  name = auth[:info][:name]
+  email = auth[:info][:email]
+  remote_picture_url = auth[:info][:image]
+  password = Devise.friendly_token[0, 20]
+  profile = auth[:info][:description]
+  #必要に応じて情報追加してください
 
-    # メールアドレスをすべて小文字にする
-    def downcase_email
-      email.downcase!
+  #ユーザはSNSで登録情報を変更するかもしれので、毎回データベースの情報も更新する
+  self.find_or_initialize_by(provider: provider, uid: uid) do |user|
+    user.name = name
+    user.email = email
+    user.password = password
+    # user.remote_picture_url = remote_picture_url
+    user.profile = profile
+    user.activated = true
+
+    case provider.to_s
+    when 'twitter'
+      user.remote_picture_url = remote_picture_url
+    when 'google'
+      user.remote_picture_url = remote_picture_url
+    when 'facebook'
+      user.picture = remote_picture_url
     end
 
-    # 有効化トークンとダイジェストを作成および代入する
-    def create_activation_digest
-      self.activation_token  = User.new_token
-      self.activation_digest = User.digest(activation_token)
+  end
+end
+
+  private
+
+  # メールアドレスをすべて小文字にする
+  def downcase_email
+    email.downcase!
+  end
+
+  # 有効化トークンとダイジェストを作成および代入する
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
+
+    # アップロードされた画像のサイズをバリデーションする
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "５MBよりサイズを小さくしてください。")
+      end
     end
 
   end

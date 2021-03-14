@@ -45,3 +45,9 @@ yarn-debug.log*
 
 # アップロードされたテスト画像を無視する
 /public/uploadspublic/uploads
+
+# APIの設定 https://qiita.com/nakanishi03/items/2dfe8b8431a044a01bc6
+.env
+
+# API https://qiita.com/julia817/items/7908c01984a291b74966
+/config/local_env.yml

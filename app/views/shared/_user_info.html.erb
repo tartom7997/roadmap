@@ -1,4 +1,12 @@
-<%= link_to gravatar_for(current_user, size: 50), current_user %>
 <h1><%= current_user.name %></h1>
-<span><%= link_to "自分のプロフィールを見る", current_user %></span>
-<span><%= pluralize(current_user.microposts.count, "micropost") %></span>
+    <% if @current_user.picture? %>
+        <%= image_tag @current_user.picture.thumb_user.url, class: "user-icon" %>
+    <% else %>
+        <%= image_tag "/assets/default.png", alt: "user-icon", :size => '100x100', class: "user-icon" %>
+    <% end %>
+    <span>
+        <%= link_to "自分のプロフィールを見る", current_user %>
+    </span>
+    <span>
+        <%= pluralize(current_user.microposts.count, "micropost") %>
+    </span>

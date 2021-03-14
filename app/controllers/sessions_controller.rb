@@ -4,21 +4,35 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
-      if @user.activated?
-        log_in @user
-        params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+    auth = request.env['omniauth.auth']
+    if auth.present?
+      @user = User.find_or_initialize_from_auth(request.env['omniauth.auth'])
+      @user.save
+      session[:user_id] = @user.id
+      if session[:user_id]
+        flash[:success] = "ユーザー認証が完了しました。"
         redirect_back_or @user
       else
-        message  = "アカウントは有効化されていません。 "
-        message += "あなたに送られたメールの有効化リンクをチェックしてみてください。"
-        flash[:warning] = message
+        flash[:danger] = "ユーザー認証に失敗しました。"
         redirect_to root_url
       end
-    else
-      flash.now[:danger] = '無効なemail、もしくはパスワードの組み合わせです。'
-      render 'new'
+    else #既存パタン
+      @user = User.find_by(email: params[:session][:email].downcase)
+      if @user && @user.authenticate(params[:session][:password])
+        if @user.activated?
+          log_in @user
+          params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+          redirect_back_or @user
+        else
+          message  = "アカウントは有効化されていません。 "
+          message += "あなたに送られたメールの有効化リンクをチェックしてみてください。"
+          flash[:warning] = message
+          redirect_to root_url
+        end
+      else
+        flash.now[:danger] = '無効なemail、もしくはパスワードの組み合わせです。'
+        render 'new'
+      end
     end
   end
 

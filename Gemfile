@@ -95,3 +95,18 @@ gem 'mini_magick'
 gem 'rexml'
 
 gem 'bootstrap', '~> 4.5.0'
+
+# gem 'devise'
+gem 'devise', git: "https://github.com/heartcombo/devise.git",  branch: "ca-omniauth-2"
+# https://www.takayasugiyama.com/entry/2021/01/17/043512
+# gem 'devise', github: 'heartcombo/devise'
+gem 'omniauth'
+# gem 'omniauth', '1.9.1'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-github'
+gem 'dotenv-rails'            # 環境変数の管理
+gem "omniauth-rails_csrf_protection"
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'

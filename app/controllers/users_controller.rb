@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     redirect_to root_url and return unless @user.activated?
     #debugger
     @microposts = @user.microposts.paginate(page: params[:page])
+    # @id = User.id
+    # @name = User.name
+    # @picture = User.picture
+    # @profile = User.profile
+    # @videos = User.videos.order("created_at DESC")
   end
 
   def new
@@ -33,9 +38,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+    # @picture = User.picture
   end
 
   def update
+    @user = User.find(params[:id])
     if @user.update(user_params)
       # 更新に成功した場合を扱う。
       flash[:success] = "プロフィールが更新されました。"
@@ -69,7 +77,8 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation,
+                                   :gender, :birthday, :profile, :picture)
     end
 
     # beforeアクション
