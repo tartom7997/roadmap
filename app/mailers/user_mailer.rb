@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
   #
   def account_activation(user)
     @user = user
-    mail to: user.email, subject: "【Roadmap】アカウントの有効化について"
+    mail to: user.email, subject: "【Growhtmap】アカウントの有効化について"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -17,6 +17,12 @@ class UserMailer < ApplicationMailer
   #
   def password_reset(user)
     @user = user
-    mail to: user.email, subject: "【Roadmap】パスワードの再設定について"
+    mail to: user.email, subject: "【Growhtmap】パスワードの再設定について"
   end
+
+  def email_reset(user)
+    @user = user
+    mail to: user.email_reset_before, subject: "【Growhtmap】Eメールアドレスの再設定について"
+  end
+
 end

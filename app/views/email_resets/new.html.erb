@@ -1,0 +1,21 @@
+<% provide(:title, "Change email") %>
+
+<div class="container share-container">
+  <h1>Change email</h1>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <%= form_with model: User.create, url: email_resets_path, local: true do |f| %>  
+        
+        <%= f.label :現在のメールアドレス %>
+        <div class ="form-control">
+          <%= @user.email %>
+        </div>
+
+        <%= f.label :新しいメールアドレス %>
+        <%= f.email_field :email_reset_before, class: 'form-control' %>
+
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

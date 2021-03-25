@@ -1,32 +1,34 @@
 <p>
   <%= button_to '/auth/twitter', class: "btn btn-social btn-twitter form-control-sns" do %>
-    <span class="fa fa-twitter"></span> Twitterアカウントでログイン
+    <span class="fa fa-twitter"></span> Twitterアカウントで登録
   <% end %>
 </p>
 <p>
   <%= button_to '/auth/facebook', class: "btn btn-social btn-facebook form-control-sns" do %>
-    <span class="fa fa-facebook"></span> Facebookアカウントでログイン
+    <span class="fa fa-facebook"></span> Facebookアカウントで登録
   <% end %>
 </p>
 <p>
   <%= button_to '/auth/google_oauth2', class: "btn btn-social btn-o btn-google form-control-sns" do %>
-    <span class="fa fa-google"></span> Googleアカウントでログイン
+    <span class="fa fa-google"></span> Googleアカウントで登録
   <% end %>
 </p>
 
 <%= form_with model: @user, url: yield(:url), local: true do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
   
-    <%= f.label :ユーザー名 %>
+    <p style="color:#f00;">* = 必須</p>
+    
+    <%= f.label :ユーザー名 %> <span style="color:#f00;"> * </span>
     <%= f.text_field :name, class: 'form-control' %>
   
-    <%= f.label :メールアドレス %>
+    <%= f.label :メールアドレス %> <span style="color:#f00;"> * </span>
     <%= f.email_field :email, class: 'form-control' %>
 
-    <%= f.label :パスワード %>
+    <%= f.label :パスワード %> <span style="color:#f00;"> * </span>
     <%= f.password_field :password, class: 'form-control' %>
   
-    <%= f.label :パスワード（確認用） %>
+    <%= f.label :パスワード（確認用） %> <span style="color:#f00;"> * </span>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>

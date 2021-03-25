@@ -9,17 +9,17 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email, unless: :uid?
+  before_save   :downcase_email
   before_create :create_activation_digest
-  validates :name,  presence: true, unless: :uid?, length: { maximum: 50 }
+  validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, unless: :uid?, length: { maximum: 255 },
+  validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   # has_secure_password validations: false # https://qiita.com/tkr_ld/items/e38a5b92866f41087f57
   has_secure_password
-  validates :password, presence: true, unless: :uid?, length: { minimum: 6 }, allow_nil: true
-  validates :profile, unless: :uid?, length: { maximum: 250 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :profile, length: { maximum: 250 }
   mount_uploader :picture, PictureUploader
   validate  :picture_size
 
@@ -83,6 +83,16 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  # Eメールアドレス再設定のメールを送信する
+  def send_email_reset_email
+    UserMailer.email_reset(self).deliver_now
+  end
+
+  # Eメールアドレス再設定の期限が切れている場合はtrueを返す
+  def email_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
   # ユーザーのステータスフィードを返す
   def feed
     # フォローしているユーザーの投稿を含めない
@@ -139,7 +149,7 @@ def self.find_or_initialize_from_auth(auth)
     user.password = password
     # user.remote_picture_url = remote_picture_url
     user.profile = profile
-    user.activated = true
+    # user.activated = true
 
     case provider.to_s
     when 'twitter'
@@ -159,6 +169,7 @@ end
   def downcase_email
     email.downcase!
   end
+
 
   # 有効化トークンとダイジェストを作成および代入する
   def create_activation_digest

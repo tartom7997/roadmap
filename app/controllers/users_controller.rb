@@ -73,6 +73,35 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+# sign_up sns
+
+  def new_sns
+    auth = request.env['omniauth.auth']
+    if auth.present?      # 認証情報があるなら
+      @user = User.find_or_initialize_from_auth(request.env['omniauth.auth'])
+      if @user.activated?
+        @user.save
+        log_in @user
+        flash[:success] = "ユーザー認証が完了しました。"
+        redirect_back_or @user
+      else
+        flash[:success] = "ユーザー登録情報を入力して下さい。"
+        @user = User.find_or_initialize_from_auth(request.env['omniauth.auth'])
+      end
+    end
+  end
+
+  def create_sns
+    @user = User.new(user_params)
+    if @user.save
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "アカウントを有効化のためのメールを送信します。数分後にメールをチェックしてください。迷惑メールに入っていないかもご注意ください。"
+      redirect_to root_url
+    else
+      render 'new_sns'
+    end
+  end
+
   private
 
     def user_params

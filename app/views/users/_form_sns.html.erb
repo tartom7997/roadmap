@@ -1,0 +1,42 @@
+<%= form_with model: @user, url: yield(:url), local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+  
+<p style="color:#f00;">* = 必須</p>
+
+  <%= f.label :ユーザー画像 %>
+  <div class="user-icon">
+  <% if @user.picture? %>
+    <%= image_tag @user.picture.thumb_user.url, class:"user-icon" %>
+  <% else %>
+    <%= image_tag "/assets/default.png", alt: "user-icon", :size => '100x100', class:"user-icon" %>
+  <% end %>
+  <div class="btn--edit__selectimage">
+    <button type="button">
+      <%= f.file_field :picture, accept: 'picture/jpeg,picture/gif,picture/png' %>
+    </button>
+  </div>
+</div>
+
+    <%= f.label :ユーザー名 %> <span style="color:#f00;"> * </span>
+    <%= f.text_field :name, class: 'form-control' %>
+  
+    <%= f.label :メールアドレス %> <span style="color:#f00;"> * </span>
+    <%= f.email_field :email, class: 'form-control' %>
+
+    <%= f.label :性別 %>
+    <%= f.select :gender, [["男性", "male"], ["女性", "female"], ["その他", "Others"]], {prompt: ""}, { autofocus: 'true', class: 'form-control'}%> 
+
+    <%= f.label :"誕生日" %>
+    <%= f.date_field :birthday, use_month_numbers: true,start_year: 1930, end_year: (Time.now.year), default: Date.new(2000, 1, 1), class: 'form-control'%>
+
+    <%= f.label :"自己紹介" %>
+    <%= f.text_area :profile, autocomplete: 'off', class: 'account-page__inner--user-form' %>
+
+    <%= f.label :パスワード %> <span style="color:#f00;"> * </span>
+    <%= f.password_field :password, class: 'form-control' %>
+  
+    <%= f.label :パスワード（確認用） %> <span style="color:#f00;"> * </span>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% end %>

@@ -1,6 +1,8 @@
 <%= form_with model: @user, url: yield(:url), local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
+  <p style="color:#f00;">* = 必須</p>
+  
   <%= f.label :ユーザー画像 %>
   <div class="user-icon">
   <% if @user.picture? %>
@@ -15,11 +17,14 @@
   </div>
 </div>
 
-    <%= f.label :ユーザー名 %>
+    <%= f.label :ユーザー名 %> <span style="color:#f00;"> * </span>
     <%= f.text_field :name, class: 'form-control' %>
   
     <%= f.label :メールアドレス %>
-    <%= f.email_field :email, class: 'form-control' %>
+    <%= link_to "(メールアドレスを変更したい場合)", new_email_reset_path %>
+    <div class ="form-control">
+      <%= @user.email %>
+    </div>
 
     <%= f.label :性別 %>
     <%= f.select :gender, [["男性", "male"], ["女性", "female"], ["その他", "Others"]], {prompt: ""}, { autofocus: 'true', class: 'form-control'}%> 
@@ -30,10 +35,10 @@
     <%= f.label :"自己紹介" %>
     <%= f.text_area :profile, autocomplete: 'off', class: 'account-page__inner--user-form' %>
 
-    <%= f.label :パスワード %>
+    <%= f.label :パスワード %> <span style="color:#f00;"> * </span>
     <%= f.password_field :password, class: 'form-control' %>
   
-    <%= f.label :パスワード（確認用） %>
+    <%= f.label :パスワード（確認用） %> <span style="color:#f00;"> * </span>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>

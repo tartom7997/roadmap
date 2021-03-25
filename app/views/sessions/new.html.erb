@@ -22,10 +22,12 @@
 
         <%= form_with scope: :session, url:login_path, local: true do |f| %>
 
-          <%= f.label :email %>
+          <p style="color:#f00;">* = 必須</p>
+
+          <%= f.label :email %> <span style="color:#f00;"> * </span>
           <%= f.email_field :email, class: 'form-control' %>
 
-          <%= f.label :password %>
+          <%= f.label :password %> <span style="color:#f00;"> * </span>
           <%= link_to "(パスワードを忘れた場合)", new_password_reset_path %>
           <%= f.password_field :password, class: 'form-control' %>
 
