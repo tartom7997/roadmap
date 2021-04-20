@@ -30,6 +30,19 @@
   
     <%= f.label :パスワード（確認用） %> <span style="color:#f00;"> * </span>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
-  
+    
+    <span class="signin__checkbtn--agreement">
+    <%= f.check_box :agreement, :as => :boolean, checked:false %>
+    </span>
+    <%= f.label :利用規約とプライバシーポリシーに同意する %> <span style="color:#f00;"> * </span>
+    
+    <div class="signin__box--agreement">
+    <%= render 'shared/terms_of_use' %>
+    </div>
+
+    <div class="signin__box--agreement">
+    <%= render 'shared/privacy_policy' %>
+    </div>
+
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
   <% end %>

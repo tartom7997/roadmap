@@ -15,7 +15,7 @@
         </div>
 
         <%= f.label :新しいemail %>
-        <%= f.email_field :email, value: @user.email_reset_before, autocomplete: 'off', class: 'form-control' %>
+        <%= f.email_field :email, value: @user.email_reset_before, :readonly => true, autocomplete: 'off', class: 'form-control' %>
 
         <%= f.label :パスワード %>
         <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>

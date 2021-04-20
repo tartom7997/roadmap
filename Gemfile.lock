@@ -91,8 +91,6 @@ GEM
       sassc-rails (>= 2.0.0)
     bootstrap-social-rails (4.12.0)
       railties (>= 3.1)
-    bootstrap-will_paginate (1.0.0)
-      will_paginate
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.35.3)
@@ -529,6 +527,8 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     will_paginate (3.3.0)
+    will_paginate-bootstrap4 (0.2.2)
+      will_paginate (~> 3.0, >= 3.0.0)
     xml-simple (1.1.8)
     xmlrpc (0.3.2)
       webrick
@@ -544,7 +544,6 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.5.0)
   bootstrap-social-rails
-  bootstrap-will_paginate
   byebug
   capybara (>= 2.15)
   carrierwave
@@ -586,6 +585,7 @@ DEPENDENCIES
   webdrivers
   webpacker (~> 4.0)
   will_paginate
+  will_paginate-bootstrap4
 
 RUBY VERSION
    ruby 3.0.0p0

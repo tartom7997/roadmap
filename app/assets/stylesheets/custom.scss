@@ -56,6 +56,13 @@ textarea {
   }
 }
 
+.body-fix {
+  max-width: 100%;
+  margin: auto;
+}
+
+/* pagenation */
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -182,7 +189,8 @@ aside {
 
 .stats {
   overflow: auto;
-  margin-top: 0;
+  margin-top: 5px;
+  margin-left: 11px;
   padding: 0;
   a {
     float: left;
@@ -218,6 +226,108 @@ aside {
   padding: 0;
 }
 
+/* sidebar-2 https://qiita.com/takehanKosuke/items/f4f2e49e84576a555ee6 */ 
+
+.sidebar-fix {
+  margin: 0px 0px 0px -20px;
+}
+
+.channel-menu {
+  position: fixed;
+  top: 0;
+  @media screen and (max-width: 600px) {
+    position: inherit;
+    margin-left: 0;
+  }
+}
+
+.channel-menu_name {
+  display: inline-block;
+  padding: 0 0.5rem 0 1.5rem;
+  color: #555459;
+  font-size: 1.4rem;
+  font-weight: 900;
+  line-height: 53px;
+  cursor: pointer;
+  @media screen and (max-width: 600px) {
+    padding-left: 0;
+  }
+}
+.channel_name .prefix {
+  margin-right: 8px;
+}
+
+.channel-menu_prefix {
+  padding-right: 0.5rem;
+  font-weight: 500;
+}
+.channel-menu_date {
+  font-weight: bold;
+}
+.channel-menu h3 {
+  float: right;
+  padding-right: 0.1rem;
+  font-weight: 500;
+}
+.listings {
+  margin-right: 30px;
+  min-height: 100vh;
+  height: 100%;
+  width: 220px;
+  float: left;
+  color: #0C0C0C;
+  background-color: #F6F7F8;
+  // overflow-y: auto;
+  // overflow-x: hidden;
+  z-index: 10;
+  @media screen and (max-width: 1000px) {
+    display: none;
+    position: absolute;
+    &.show {
+      display: block;
+    }
+  }
+}
+
+.listings_channels {
+  position: sticky;
+  top: 100px;
+  margin: 1rem 0 2rem;
+}
+
+.channel_list {
+  padding: 10px 0px;
+  list-style-type: none;
+  text-align: center;
+  color: #ab9ba9;
+}
+
+.channel {
+  margin: 20px 0px;
+  height: 24px;
+  line-height: 24px;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  padding-right: 17px;
+  color: #ffffff;
+  padding-left: 1rem;
+  a {
+    color: #0C0C0C;
+    text-decoration: none;
+    width: 100%;
+    display: inline-block;
+  }
+  a:hover {
+    color: #68A5DA;
+  }
+}
+
+.channel.active {
+  margin: 20px 0px;
+  background: #C5E4Ed;
+}
+
+
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -231,7 +341,7 @@ textarea {
     display: block;
     margin: auto;
     width: 100%;
-    height: 300px;
+    height: 100px;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     font-weight: 400;
@@ -441,6 +551,26 @@ input {
   margin: 30px 0px 0px 0px;
 }
 
+.signin__checkbtn--agreement {
+  input {
+    width: 5%;
+  }
+}
+
+.signin__box--agreement {
+  width: 100%;
+  height: 150px;
+  overflow: scroll;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  margin: 20px 0px;
+}
+
+.term_agreement {
+  padding: 10px;
+  font-size: 0.6em;
+}
+
 /* Help */
 
 
@@ -490,4 +620,12 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+/* Roadmap */
+
+.roadmap__btn--create {
+  padding-bottom: 10px;
+  width: 200px;
+  margin-left: auto;
 }

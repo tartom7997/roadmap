@@ -5,16 +5,29 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
   </head>
   <body style="background-color: #0C0C0C;">
     <%= render 'layouts/header' %>
-    <div>
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
-      <%= yield %>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
-    </div>
+      <% if logged_in? %>
+        <div class="row">
+          <div class="col-2 sidebar-fix">
+            <%= render'layouts/sidebar' %>
+          </div>
+          <div class="col-9 body-fix">
+            <%= yield %>
+            <%= render 'layouts/footer' %>
+            <%= debug(params) if Rails.env.development? %>
+          </div>
+      <% else %>
+      <div>
+        <%= yield %>
+        <%= render 'layouts/footer' %>
+        <%= debug(params) if Rails.env.development? %>
+      </div>
+      <% end %>
   </body>
 </html>

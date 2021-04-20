@@ -86,7 +86,7 @@ gem 'bcrypt'
 
 gem 'faker'
 gem 'will_paginate'
-gem 'bootstrap-will_paginate'
+gem 'will_paginate-bootstrap4'
 gem 'mail-iso-2022-jp'
 
 gem 'carrierwave'

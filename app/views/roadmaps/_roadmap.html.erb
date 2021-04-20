@@ -1,0 +1,127 @@
+<% if current_user?(@user) %>
+  <li id="roadmap-<%= roadmap.id %>">
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3">
+            <i class="mr-2 far fa-newspaper fa-2x"></i>
+            <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
+                <%= link_to 'Cover', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <div class="row mr-4">
+                    <% if roadmap.picture? %>
+                      <%= image_tag roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
+                    <% end %>
+                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="media text-muted pt-3">
+              <i class="mr-2 far fa-newspaper fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <%= link_to 'Title', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <% if @user.roadmaps.any? %>
+                    <%= roadmap.title %>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="media text-muted pt-3">
+            <i class="mr-2 fas fa-bullseye fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <%= link_to 'Purpose', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <% if @user.roadmaps.any? %>
+                    <%= roadmap.purpose %>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="media text-muted pt-3">
+            <i class="mr-2 fas fa-signal fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <%= link_to 'Target', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <% if @user.roadmaps.any? %>
+                    <%= roadmap.target %>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-3 p-3 bg-white rounded shadow-sm text-right">
+        <span class="timestamp">
+          Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
+          <% if current_user?(roadmap.user) %>
+            <%= link_to "独学中に設定する", learnig_user_roadmap_path(@user, roadmap.id), method: :patch,
+                                            data: { confirm: "こちらを独学中に設定しますか?" } %>
+            <%= link_to "削除する", user_roadmap_path(@user, roadmap.id), method: :delete,
+                                            data: { confirm: "本当に消しますか?" } %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </li>
+<% else %> 
+  <li id="roadmap-<%= roadmap.id %>">
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <%= link_to picture_for(roadmap.user), roadmap.user %>
+          <span class="user">
+            <%= link_to roadmap.user.name, roadmap.user, class: "h3 ml-3 text-gray-dark" %>
+          </span>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3">
+            <i class="mr-2 far fa-newspaper fa-2x"></i>
+            <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
+                <%= link_to 'Cover', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <div class="row mr-4">
+                    <% if roadmap.picture? %>
+                      <%= image_tag roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
+                    <% end %>
+                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="media text-muted pt-3">
+              <i class="mr-2 far fa-newspaper fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <%= link_to 'Title', new_user_path, class: "h3 d-block text-gray-dark" %>
+                    <%= roadmap.title %>
+              </div>
+            </div>
+          </div>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="media text-muted pt-3">
+            <i class="mr-2 fas fa-bullseye fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <%= link_to 'Purpose', new_user_path, class: "h3 d-block text-gray-dark" %>
+                    <%= roadmap.purpose %>
+              </div>
+            </div>
+          </div>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="media text-muted pt-3">
+            <i class="mr-2 fas fa-signal fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <%= link_to 'Target', new_user_path, class: "h3 d-block text-gray-dark" %>
+                    <%= roadmap.target %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-3 p-3 bg-white rounded shadow-sm text-right">
+        <span class="timestamp">
+          Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
+        </span>
+      </div>
+    </div>
+  </li>
+<% end %>

@@ -20,8 +20,10 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :profile, length: { maximum: 250 }
+  validates_acceptance_of :agreement, allow_nil: false, on: :create
   mount_uploader :picture, PictureUploader
   validate  :picture_size
+  has_many :roadmaps, dependent: :destroy
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -130,38 +132,43 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-#auth hashからユーザ情報を取得
-#データベースにユーザが存在するならユーザ取得して情報更新する；存在しないなら新しいユーザを作成する
-def self.find_or_initialize_from_auth(auth)
-  provider = auth[:provider]
-  uid = auth[:uid]
-  name = auth[:info][:name]
-  email = auth[:info][:email]
-  remote_picture_url = auth[:info][:image]
-  password = Devise.friendly_token[0, 20]
-  profile = auth[:info][:description]
-  #必要に応じて情報追加してください
+  #auth hashからユーザ情報を取得
+  #データベースにユーザが存在するならユーザ取得して情報更新する；存在しないなら新しいユーザを作成する
+  def self.find_or_initialize_from_auth(auth)
+    provider = auth[:provider]
+    uid = auth[:uid]
+    name = auth[:info][:name]
+    email = auth[:info][:email]
+    remote_picture_url = auth[:info][:image]
+    password = Devise.friendly_token[0, 20]
+    profile = auth[:info][:description]
+    #必要に応じて情報追加してください
 
-  #ユーザはSNSで登録情報を変更するかもしれので、毎回データベースの情報も更新する
-  self.find_or_initialize_by(provider: provider, uid: uid) do |user|
-    user.name = name
-    user.email = email
-    user.password = password
-    # user.remote_picture_url = remote_picture_url
-    user.profile = profile
-    # user.activated = true
+    #ユーザはSNSで登録情報を変更するかもしれので、毎回データベースの情報も更新する
+    self.find_or_initialize_by(provider: provider, uid: uid) do |user|
+      user.name = name
+      user.email = email
+      user.password = password
+      # user.remote_picture_url = remote_picture_url
+      user.profile = profile
+      # user.activated = true
 
-    case provider.to_s
-    when 'twitter'
-      user.remote_picture_url = remote_picture_url
-    when 'google'
-      user.remote_picture_url = remote_picture_url
-    when 'facebook'
-      user.picture = remote_picture_url
+      case provider.to_s
+      when 'twitter'
+        user.remote_picture_url = remote_picture_url
+      when 'google'
+        user.remote_picture_url = remote_picture_url
+      when 'facebook'
+        user.picture = remote_picture_url
+      end
     end
-
   end
-end
+
+  # # ユーザーのステータスフィードを返す
+  # def feed_roadmap
+  #   Roadmap.where(user_id: active_relationships.select(:followed_id))
+  #   .or(Roadmap.where(user_id: id))
+  # end
 
   private
 

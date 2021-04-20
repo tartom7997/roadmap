@@ -3,6 +3,7 @@ User.create!(name:  "tomtar9779",
              email: "tomtar9779@gmail.com",
              password:              "kyuunana97",
              password_confirmation: "kyuunana97",
+             agreement: true,
              admin: true,
              activated: true,
              activated_at: Time.zone.now)
@@ -16,6 +17,7 @@ User.create!(name:  "tomtar9779",
                email: email,
                password:              password,
                password_confirmation: password,
+               agreement: true,
                activated: true,
                activated_at: Time.zone.now) 
 end
