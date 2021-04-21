@@ -10,7 +10,7 @@
         <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
             <%= link_to 'Cover', new_user_path, class: "h3 d-block text-gray-dark" %>
             <div class="row mr-4">
-            <% if @roadmap.picture? %>
+            <% if @user.roadmaps.any? %>
             <%= image_tag @roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
             <% end %>
             </div>
