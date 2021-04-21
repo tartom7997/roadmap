@@ -6,7 +6,7 @@
           <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
-                <%= link_to 'Cover', new_user_path, class: "h3 d-block text-gray-dark" %>
+                <%= link_to 'Cover', user_roadmap_path(id: current_user, user_id: current_user), class: "h3 d-block text-gray-dark" %>
                   <div class="row mr-4">
                     <% if roadmap.picture? %>
                       <%= image_tag roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
@@ -20,7 +20,7 @@
             <div class="media text-muted pt-3">
               <i class="mr-2 far fa-newspaper fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <%= link_to 'Title', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <%= link_to 'Title', user_roadmap_path(id: current_user, user_id: current_user), class: "h3 d-block text-gray-dark" %>
                   <% if @user.roadmaps.any? %>
                     <%= roadmap.title %>
                   <% end %>
@@ -31,7 +31,7 @@
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-bullseye fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <%= link_to 'Purpose', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <%= link_to 'Purpose', user_roadmap_path(id: current_user, user_id: current_user), class: "h3 d-block text-gray-dark" %>
                   <% if @user.roadmaps.any? %>
                     <%= roadmap.purpose %>
                   <% end %>
@@ -42,7 +42,7 @@
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-signal fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <%= link_to 'Target', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <%= link_to 'Target', user_roadmap_path(id: current_user, user_id: current_user), class: "h3 d-block text-gray-dark" %>
                   <% if @user.roadmaps.any? %>
                     <%= roadmap.target %>
                   <% end %>
@@ -78,7 +78,7 @@
           <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
-                <%= link_to 'Cover', new_user_path, class: "h3 d-block text-gray-dark" %>
+                <p class= "h3 d-block text-gray-dark">Cover</p>
                   <div class="row mr-4">
                     <% if roadmap.picture? %>
                       <%= image_tag roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
@@ -92,7 +92,7 @@
             <div class="media text-muted pt-3">
               <i class="mr-2 far fa-newspaper fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <%= link_to 'Title', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <p class= "h3 d-block text-gray-dark">Title</p>
                     <%= roadmap.title %>
               </div>
             </div>
@@ -101,7 +101,7 @@
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-bullseye fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <%= link_to 'Purpose', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <p class= "h3 d-block text-gray-dark">Purpose</p>
                     <%= roadmap.purpose %>
               </div>
             </div>
@@ -110,7 +110,7 @@
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-signal fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <%= link_to 'Target', new_user_path, class: "h3 d-block text-gray-dark" %>
+                  <p class= "h3 d-block text-gray-dark">Target</p>
                     <%= roadmap.target %>
               </div>
             </div>

@@ -1,4 +1,10 @@
+<h1>Welcome to the Growthmap</h1>
 
+<p>こんにちは、<%= @user.name %>さん。</p>
 
-<%= link_to "X", edit_account_activation_url(@user.activation_token,
+<p>
+ようこそ、Growthmapへ！<br>アカウントを有効化するために、下のリンクをクリックしてください。
+</p>
+
+<%= link_to "アカウントを有効化する", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email) %>
