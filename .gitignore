@@ -51,3 +51,5 @@ yarn-debug.log*
 
 # API https://qiita.com/julia817/items/7908c01984a291b74966
 /config/local_env.yml
+
+sendgrid.env

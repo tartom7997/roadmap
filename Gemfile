@@ -110,3 +110,5 @@ gem 'dotenv-rails'            # 環境変数の管理
 gem "omniauth-rails_csrf_protection"
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
+
+gem 'sendgrid-ruby'
