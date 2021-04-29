@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@example.com"
+  default from: "growthmap.ss@gmail.com"
   layout 'mailer'
 end
