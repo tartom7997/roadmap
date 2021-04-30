@@ -7,6 +7,14 @@ User.create!(name:  "tomtar9779",
              admin: true,
              activated: true,
              activated_at: Time.zone.now)
+
+User.create!(name:  "Tester",
+             email: "tester@gmail.com",
+             password:              "kyuunana97",
+             password_confirmation: "kyuunana97",
+             agreement: true,
+             activated: true,
+             activated_at: Time.zone.now)
             
 
 # 99.times do |n|

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+  before_action :logged_in_user, only: [:edit, :update, :destroy,
                                         :following, :followers]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     redirect_to root_url and return unless @user.activated?
     #debugger
     @microposts = @user.microposts.paginate(page: params[:page])
+    @roadmap  = @user.roadmaps.order(updated_at: :desc).first
     # @id = User.id
     # @name = User.name
     # @picture = User.picture
