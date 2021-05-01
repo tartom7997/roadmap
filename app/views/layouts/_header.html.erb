@@ -42,7 +42,7 @@
                   <%= link_to " My Roadmaps", user_roadmap_path(id: current_user, user_id: current_user), class: "dropdown-item fas fa-road" %>
                     <div class="dropdown-divider"></div>
                     <%= link_to " Profile", current_user, class: "dropdown-item fas fa-id-card" %>
-                    <%= link_to " Settings", edit_user_path(current_user), class: "dropdown-item fas fa-cogs" %>
+                    <%= link_to " Settings", edit_user_path(current_user), class: "dropdown-item fas fa-cogs", data: {"turbolinks" => false} %>
                   </div>
               </li>
                 <li class="nav-item">

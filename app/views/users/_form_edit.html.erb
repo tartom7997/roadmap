@@ -12,7 +12,7 @@
   <% end %>
   <div class="btn--edit__selectimage">
     <button type="button">
-      <%= f.file_field :picture, accept: 'picture/jpeg,picture/gif,picture/png' %>
+      <%= f.file_field :picture %>
     </button>
   </div>
 </div>
@@ -33,9 +33,10 @@
     <%= f.date_field :birthday, use_month_numbers: true,start_year: 1930, end_year: (Time.now.year), default: Date.new(2000, 1, 1), class: 'form-control'%>
 
     <%= f.label :"自己紹介" %>
-    <%= f.text_area :profile, autocomplete: 'off', class: 'account-page__inner--user-form' %>
+    <%= f.text_area :profile, autocomplete: 'off', class: 'account-page__inner--user-form js-text' %>
+    <P class="js-text-count pull-right"></P>
 
-    <%= f.label :パスワード %> <span style="color:#f00;"> * </span>
+    <%= f.label :パスワード, class: 'mt-3' %> <span style="color:#f00;"> * </span>
     <%= f.password_field :password, class: 'form-control' %>
   
     <%= f.label :パスワード（確認用） %> <span style="color:#f00;"> * </span>

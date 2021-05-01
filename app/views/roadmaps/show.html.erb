@@ -12,7 +12,7 @@
     </div>
       <% if current_user?(@user) %>
         <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
-          <%= link_to "新しいロードマップを作る", new_user_roadmap_path, class: "btn btn-sm btn-primary" %>
+          <%= link_to "新しいロードマップを作る", new_user_roadmap_path, class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
         </div>
       <% end %>
       <% if @user.roadmaps.any? %>

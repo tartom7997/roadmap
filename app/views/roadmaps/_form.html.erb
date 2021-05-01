@@ -2,16 +2,19 @@
     <%= render 'shared/error_messages', object: f.object %>
     
     <%= f.label :Title（ロードマップのタイトル） %>
-    <%= f.text_area :title, autocomplete: 'off', class: 'form-control mb-3', :placeholder => "30歳未経験からウェブマーケティングで毎月10万円稼ぐまでのロードマップ" %>
+    <%= f.text_area :title, autocomplete: 'off', class: 'form-control mb-3 js-text_50', :placeholder => "30歳未経験からウェブマーケティングで毎月10万円稼ぐまでのロードマップ" %>
+    <P class="js-text-count_50 pull-right"></P>
   
-    <%= f.label :Purpose（学ぶ目的） %>
-    <%= f.text_area :purpose, autocomplete: 'off', class: 'form-control mb-3', :placeholder => "自分の経験を軸に世の中に役立つ情報を継続的に発信するため" %>
+    <%= f.label :Purpose（学ぶ目的）, class: 'mt-4' %>
+    <%= f.text_area :purpose, autocomplete: 'off', class: 'form-control mb-3 js-text_100', :placeholder => "自分の経験を軸に世の中に役立つ情報を継続的に発信するため" %>
+    <P class="js-text-count_100 pull-right"></P>
 
-    <%= f.label :Target（目的を達成するための目標） %>
-    <%= f.text_area :target, autocomplete: 'off', class: 'form-control mb-3', :placeholder => "まずは、20XX年までにウェブメディアを立ち上げる。" %>
+    <%= f.label :Target（目的を達成するための目標）, class: 'mt-4' %>
+    <%= f.text_area :target, autocomplete: 'off', class: 'form-control mb-3 js-text_100', :placeholder => "まずは、20XX年までにウェブメディアを立ち上げる。" %>
+    <P class="js-text-count_100 pull-right"></P>
 
     <span class="picture">
-    <%= f.file_field :picture, accept: 'picture/jpeg,picture/gif,picture/png' %>
+    <%= f.file_field :picture %>
     </span>
 
     <%= f.submit "Submit", class: "btn btn-primary" %>
