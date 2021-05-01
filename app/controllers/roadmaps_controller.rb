@@ -31,6 +31,14 @@ class RoadmapsController < ApplicationController
     end
 
     def update
+      @roadmap = Roadmap.find(params[:id])
+      if @roadmap.update(roadmap_params)
+        # 更新に成功した場合を扱う。
+        flash[:success] = "プロフィールが更新されました。"
+        redirect_to user_roadmap_path(id: current_user, user_id: current_user)
+      else
+        render 'edit'
+      end
     end
     
     def learnig

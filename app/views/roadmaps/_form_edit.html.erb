@@ -1,0 +1,21 @@
+<%= form_with model:[@user, @roadmap], url: yield(:url), local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    
+    <%= f.label :Title（ロードマップのタイトル） %>
+    <%= f.text_area :title, autocomplete: 'off', class: 'form-control mb-3 js-text_50' %>
+    <P class="js-text-count_50 pull-right"></P>
+  
+    <%= f.label :Purpose（学ぶ目的）, class: 'mt-4' %>
+    <%= f.text_area :purpose, autocomplete: 'off', class: 'form-control mb-3 js-text_100' %>
+    <P class="js-text-count_100 pull-right"></P>
+
+    <%= f.label :Target（目的を達成するための目標）, class: 'mt-4' %>
+    <%= f.text_area :target, autocomplete: 'off', class: 'form-control mb-3 js-text_100' %>
+    <P class="js-text-count_100 pull-right"></P>
+
+    <span class="picture">
+    <%= f.file_field :picture %>
+    </span>
+
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% end %>

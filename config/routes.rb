@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'email_resets/new'
   get 'email_resets/edit'
   post '/users/:user_id/roadmaps/new', to: 'roadmaps#create'
+  patch '/users/:user_id/roadmaps/:id/edit', to: 'roadmaps#update'
 
   resources :users do
     member do
