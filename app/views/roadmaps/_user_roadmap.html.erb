@@ -1,19 +1,19 @@
-<li id="Roadmap-<%= Roadmap.id %>">
+# <li id="Roadmap-<%= Roadmap.id %>">
 
-<p> <%= image_tag roadmap.picture.thumb_roadmap.url if roadmap.picture? %> </p>
-  <p> <%= roadmap.title %> </p>
-  <p> <%= roadmap.purpose %> </p>
-  <p> <%= roadmap.target %> </p>
+# <p> <%= image_tag roadmap.picture.thumb_roadmap.url if roadmap.picture? %> </p>
+#   <p> <%= roadmap.title %> </p>
+#   <p> <%= roadmap.purpose %> </p>
+#   <p> <%= roadmap.target %> </p>
 
-  <span class="timestamp">
-    Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
-    <% if current_user?(roadmap.user) %>
-      <%= link_to "独学中に設定する", learnig_user_roadmap_path(@user, roadmap.id), method: :patch,
-                                       data: { confirm: "こちらを独学中に設定しますか?" } %>
-      <%= link_to "編集する", edit_user_roadmap_path(@user, roadmap.id), method: :get,
-      data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
-      <%= link_to "削除する", user_roadmap_path(@user, roadmap.id), method: :delete,
-                                       data: { confirm: "本当に消しますか?" } %>
-    <% end %>
-  </span>
-</li>
+#   <span class="timestamp">
+#     Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
+#     <% if current_user?(roadmap.user) %>
+#       <%= link_to "独学中に設定する", learnig_user_roadmap_path(@user, roadmap.id), method: :patch,
+#                                        data: { confirm: "こちらを独学中に設定しますか?" } %>
+#       <%= link_to "編集する", edit_user_roadmap_path(@user, roadmap.id), method: :get,
+#       data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
+#       <%= link_to "削除する", user_roadmap_path(@user, roadmap.id), method: :delete,
+#                                        data: { confirm: "本当に消しますか?" } %>
+#     <% end %>
+#   </span>
+# </li>

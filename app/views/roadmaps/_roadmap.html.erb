@@ -1,19 +1,15 @@
 <% if current_user?(@user) %>
   <li id="roadmap-<%= roadmap.id %>">
     <div class="my-3 p-3 bg-white rounded shadow-sm">
-      <%= link_to picture_for(roadmap.user), roadmap.user %>
-        <span class="user">
-          <%= link_to roadmap.user.name, roadmap.user, class: "h3 ml-3 text-gray-dark" %>
-        </span>
-    </div>
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
       <div class="row">
         <div class="col-md-12">
-          <div class="my-3 p-3 bg-white rounded shadow-sm">
-            <div class="media text-muted pt-3">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-group" id="accordion">
+            <div class="media text-muted pt-3 panel panel-default">
               <i class="mr-2 far fa-newspaper fa-2x"></i>
-              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                <h3 class="d-block text-gray-dark"> Title </h3>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray panel-heading">
+                <h3 class="d-block text-gray-dark panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= roadmap.id %>">Title</a>
+                </h3>
                   <% if roadmap.title %>
                     <%= roadmap.title %>
                   <% end %>
@@ -21,8 +17,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3">
+        <div id="collapse-<%= roadmap.id %>" class="panel-collapse collapse in col-md-3">
+          <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3 panel-body">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
               <h3 class="d-block text-gray-dark"> Cover </h3>
@@ -34,69 +30,69 @@
             </div>
           </div>
         </div>
-        <div class="col-md-9">
-          <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <div id="collapse-<%= roadmap.id %>" class="panel-collapse collapse in col-md-9">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-body">
             <div class="media text-muted pt-3">
-            <i class="mr-2 fas fa-bullseye fa-2x"></i>
-              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                <h3 class="d-block text-gray-dark"> Purpose </h3>
-                  <% if roadmap.purpose %>
-                    <%= roadmap.purpose %>
-                  <% end %>
-              </div>
+              <i class="mr-2 fas fa-bullseye fa-2x"></i>
+                <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <h3 class="d-block text-gray-dark"> Purpose </h3>
+                    <% if roadmap.purpose %>
+                      <%= roadmap.purpose %>
+                    <% end %>
+                </div>
             </div>
           </div>
-          <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-body">
             <div class="media text-muted pt-3">
-            <i class="mr-2 fas fa-signal fa-2x"></i>
-              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                <h3 class="d-block text-gray-dark"> Target </h3>
-                  <% if roadmap.target %>
-                    <%= roadmap.target %>
-                  <% end %>
-              </div>
+              <i class="mr-2 fas fa-signal fa-2x"></i>
+                <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <h3 class="d-block text-gray-dark"> Target </h3>
+                    <% if roadmap.target %>
+                      <%= roadmap.target %>
+                    <% end %>
+                </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="my-3 p-3 bg-white rounded shadow-sm text-right">
-        <span class="timestamp">
-          Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
-          <% if current_user?(roadmap.user) %>
-            <%= link_to "独学中に設定する", learnig_user_roadmap_path(@user, roadmap.id), method: :patch,
-                                            data: { confirm: "こちらを独学中に設定しますか?" } %>
-            <%= link_to "編集する", edit_user_roadmap_path(@user, roadmap.id), method: :get,
-            data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
-            <%= link_to "削除する", user_roadmap_path(@user, roadmap.id), method: :delete,
-                                            data: { confirm: "本当に消しますか?" } %>
-          <% end %>
-        </span>
+        <div id="collapse-<%= roadmap.id %>" class="col-md-12 panel-collapse collapse in my-3 p-3 bg-white rounded shadow-sm text-right">
+          <span class="timestamp panel-body">
+            Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
+            <% if current_user?(roadmap.user) %>
+              <%= link_to "独学中に設定する", learnig_user_roadmap_path(@user, roadmap.id), method: :patch,
+                                              data: { confirm: "こちらを独学中に設定しますか?" } %>
+              <%= link_to "編集する", edit_user_roadmap_path(@user, roadmap.id), method: :get,
+              data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
+              <%= link_to "削除する", user_roadmap_path(@user, roadmap.id), method: :delete,
+                                              data: { confirm: "本当に消しますか?" } %>
+            <% end %>
+          </span>
+        </div>
       </div>
     </div>
   </li>
 <% else %> 
   <li id="roadmap-<%= roadmap.id %>">
     <div class="my-3 p-3 bg-white rounded shadow-sm">
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <%= link_to picture_for(roadmap.user), roadmap.user %>
-          <span class="user">
-            <%= link_to roadmap.user.name, roadmap.user, class: "h3 ml-3 text-gray-dark" %>
-          </span>
-      </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="my-3 p-3 bg-white rounded shadow-sm">
-            <div class="media text-muted pt-3">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-group" id="accordion">
+            <div class="media text-muted pt-3 panel panel-default">
+              <div class="mr-5">
+                <%= link_to picture_for(roadmap.user), roadmap.user %>
+                <p><%= link_to roadmap.user.name, roadmap.user%></p>
+              </div>
               <i class="mr-2 far fa-newspaper fa-2x"></i>
-              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <p class= "h3 d-block text-gray-dark">Title</p>
-                    <%= roadmap.title %>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray panel-heading">
+                <h3 class="d-block text-gray-dark panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= roadmap.id %>">Title</a>
+                </h3>
+                  <%= roadmap.title %>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3">
+        <div id="collapse-<%= roadmap.id %>" class="panel-collapse collapse in col-md-3">
+          <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3 panel-body">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
                 <p class= "h3 d-block text-gray-dark">Cover</p>
@@ -108,8 +104,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-9">
-          <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <div id="collapse-<%= roadmap.id %>" class="panel-collapse collapse in col-md-9">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-body">
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-bullseye fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
@@ -118,7 +114,7 @@
               </div>
             </div>
           </div>
-          <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-body">
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-signal fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
@@ -129,8 +125,8 @@
           </div>
         </div>
       </div>
-      <div class="my-3 p-3 bg-white rounded shadow-sm text-right">
-        <span class="timestamp">
+      <div id="collapse-<%= roadmap.id %>" class="col-md-12 panel-collapse collapse in my-3 p-3 bg-white rounded shadow-sm text-right">
+        <span class="timestamp panel-body">
           Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
         </span>
       </div>

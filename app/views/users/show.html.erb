@@ -2,45 +2,39 @@
 <div class="container share-container">
   <div class="row">
     <div class="col-md-12">
-      <div class="col-md-12">
-        <%= render 'follow_form' if logged_in? %>
-
-        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
-          <i class="mr-2 fas fa-id-card fa-2x"></i>
-          <h1 class="mb-0 text-white lh-100">Profile</h1>
-        </div>
-
-        <div class="user-icon mt-3">
+      <%= render 'follow_form' if logged_in? %>
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+        <i class="mr-2 fas fa-id-card fa-2x"></i>
+        <h1 class="mb-0 text-white lh-100">Profile</h1>
+      </div>
+      <div class="user-icon mt-3">
         <% if @user.picture? %>
           <%= image_tag @user.picture.thumb_user.url, class:"user-icon" %>
         <% else %>
           <%= image_tag "/assets/default.png", alt: "user-icon", :size => '100x100', class:"user-icon" %>
         <% end %>
-        </div>
-      
-        <p class="text-center mt-3">ユーザー名</p>
-        <div class ="form-control">
-          <%= @user.name %>
-        </div>
-
-        <p class="text-center mt-3">自己紹介</p>
-        <div class ="form-control-plaintext form--control__background">
-          <%= @user.profile %>
-        </div>
-    </div>
-
-    <%= render 'shared/users_roadmaps' %>
-
-    <% if @user.microposts.any? %>
-      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
-        <i class="mr-2 fas fa-id-card fa-2x"></i>
-        <h1 class="mb-0 text-white lh-100">Microposts (<%= @user.microposts.count %>)</h1>
       </div>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= will_paginate @microposts %>
-    <% end %>
+      <p class="text-center mt-3">ユーザー名</p>
+      <div class ="form-control">
+        <%= @user.name %>
+      </div>
+      <p class="text-center mt-3">自己紹介</p>
+      <div class ="form-control-plaintext form--control__background">
+        <%= @user.profile %>
+      </div>
+      
+      <%= render 'shared/users_roadmaps' %>
+
+      <% if @user.microposts.any? %>
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+          <i class="mr-2 fas fa-id-card fa-2x"></i>
+          <h1 class="mb-0 text-white lh-100">Microposts (<%= @user.microposts.count %>)</h1>
+        </div>
+        <ol class="microposts">
+          <%= render @microposts %>
+        </ol>
+        <%= will_paginate @microposts %>
+      <% end %>
     </div>
   </div>
 </div>

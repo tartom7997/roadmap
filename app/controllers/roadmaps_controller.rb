@@ -49,13 +49,12 @@ class RoadmapsController < ApplicationController
     end
     
     def destroy
-      @user = User.find(params[:id])
       @roadmap = Roadmap.find(params[:id])
       if @roadmap.destroy
         flash[:success] = "ロードマップが削除されました。"
         redirect_to user_roadmap_url(id: current_user, user_id: current_user)
       else
-        flash[:error] = "ロードマップがされませんでした。"
+        flash[:error] = "ロードマップが削除されませんでした。"
       rrender 'show'
       end
     end
