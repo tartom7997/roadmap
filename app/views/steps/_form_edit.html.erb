@@ -1,0 +1,17 @@
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+<%= form_with model:[@user, @roadmap, @step], url: yield(:url), local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    
+    <%= f.label :ステップのタイトル, class: 'h2 mt-4' %>
+      <p>ロードマップにおける学習のステップを記録しましょう。学習ステップを初級・中級・上級のように分けても分かりやすいです！</p>
+      <%= f.text_field :name, autocomplete: 'off', class: 'form-control mb-3 js-text_50' %>
+      <P class="js-text-count_50 pull-right"></P>
+
+    <%= f.label :ステップの概要, class: 'h2 mt-4' %>
+      <p>ロードマップにおける学習のステップを概要を記載しましょう。それぞれのステップで学んでいきたいことを書くのがおすすめです！</p>
+      <%= f.text_area :content, autocomplete: 'off', class: 'account-page__inner--user-form js-text' %>
+      <P class="js-text-count pull-right"></P>
+
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
+  </div>

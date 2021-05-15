@@ -5,30 +5,35 @@
       <%= render 'follow_form' if logged_in? %>
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
         <i class="mr-2 fas fa-id-card fa-2x"></i>
-        <h1 class="mb-0 text-white lh-100">Profile</h1>
-      </div>
-      <div class="user-icon mt-3">
-        <% if @user.picture? %>
-          <%= image_tag @user.picture.thumb_user.url, class:"user-icon" %>
-        <% else %>
-          <%= image_tag "/assets/default.png", alt: "user-icon", :size => '100x100', class:"user-icon" %>
-        <% end %>
-      </div>
-      <p class="text-center mt-3">ユーザー名</p>
-      <div class ="form-control">
-        <%= @user.name %>
-      </div>
-      <p class="text-center mt-3">自己紹介</p>
-      <div class ="form-control-plaintext form--control__background">
-        <%= @user.profile %>
+        <h1 class="mb-0 text-white lh-100">プロフィール</h1>
       </div>
       
+      <div class="col-md-12">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <div class="user-icon mt-3">
+            <% if @user.picture? %>
+              <%= image_tag @user.picture.thumb_user.url, class:"user-icon" %>
+            <% else %>
+              <%= image_tag "/assets/default.png", alt: "user-icon", :size => '100x100', class:"user-icon" %>
+            <% end %>
+          </div>
+          <p class="text-center mt-3">ユーザー名</p>
+          <div class ="form-control">
+            <%= @user.name %>
+          </div>
+          <p class="text-center mt-3">自己紹介</p>
+          <div class ="form-control-plaintext form--control__background">
+            <%= @user.profile %>
+          </div>
+        </div>
+      </div>
+
       <%= render 'shared/users_roadmaps' %>
 
       <% if @user.microposts.any? %>
         <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
           <i class="mr-2 fas fa-id-card fa-2x"></i>
-          <h1 class="mb-0 text-white lh-100">Microposts (<%= @user.microposts.count %>)</h1>
+          <h1 class="mb-0 text-white lh-100">メモ (<%= @user.microposts.count %>)</h1>
         </div>
         <ol class="microposts">
           <%= render @microposts %>

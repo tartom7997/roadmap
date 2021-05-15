@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   get 'email_resets/edit'
   post '/users/:user_id/roadmaps/new', to: 'roadmaps#create'
   patch '/users/:user_id/roadmaps/:id/edit', to: 'roadmaps#update'
+  post '/users/:user_id/roadmaps/:roadmap_id/steps', to: 'steps#create'
+  patch '/users/:user_id/roadmaps/:roadmap_id/steps/:id/edit', to: 'steps#update'
+  get  '/users/:user_id/roadmaps/all', to: 'roadmaps#all'
 
   resources :users do
     member do
@@ -33,9 +36,13 @@ Rails.application.routes.draw do
     #   get :search
     # end
     resources :roadmaps do
+      collection do
+        get   :all
+      end
       member do
         patch :learnig
       end
+      resources :steps
     end
   end
 

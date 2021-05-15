@@ -1,3 +1,4 @@
+<div class="my-3 p-3 bg-white rounded shadow-sm">
 <%= form_with model: @user, url: yield(:url), local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
@@ -44,3 +45,4 @@
   
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
+</div>

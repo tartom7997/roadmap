@@ -9,10 +9,10 @@
       <%= render 'shared/stats' %>
     </section>
       <ul class="channel_list">
-        <%= sidebar_link_item('Home', root_path) %>
-        <%= sidebar_link_item('Recommendation', roadmaps_path) %>
-        <%= sidebar_link_item('My Roadmaps', user_roadmap_path(id: current_user, user_id: current_user)) %>
-        <%= sidebar_link_item('Community', users_path) %>
+        <%= sidebar_link_item('ホーム', root_path) %>
+        <%= sidebar_link_item('おすすめ', roadmaps_path) %>
+        <%= sidebar_link_item('マイロードマップ', all_user_roadmaps_url(user_id: current_user)) %>
+        <%= sidebar_link_item('コミュニティ', users_path) %>
       </ul>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<% if current_user?(@user) %>
+<% if current_user?(@user) && logged_in? %>
   <li id="roadmap-<%= roadmap.id %>">
     <div class="my-3 p-3 bg-white rounded shadow-sm">
       <div class="row">
@@ -11,9 +11,9 @@
               </div>
               <i class="mr-2 far fa-newspaper fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray panel-heading">
-                <h3 class="d-block text-gray-dark panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= roadmap.id %>">Title</a>
-                </h3>
+                <h4 class="d-block text-gray-dark panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= roadmap.id %>">タイトル</a>
+                </h4>
                   <% if roadmap.title %>
                     <%= roadmap.title %>
                   <% end %>
@@ -25,7 +25,7 @@
           <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3 panel-body">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
-              <h3 class="d-block text-gray-dark"> Cover </h3>
+              <h4 class="d-block text-gray-dark"> 表紙 </h4>
                   <div class="row mr-4">
                     <% if roadmap.picture? %>
                       <%= image_tag roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
@@ -39,7 +39,7 @@
             <div class="media text-muted pt-3">
               <i class="mr-2 fas fa-bullseye fa-2x"></i>
                 <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <h3 class="d-block text-gray-dark"> Purpose </h3>
+                  <h4 class="d-block text-gray-dark"> 目的 </h4>
                     <% if roadmap.purpose %>
                       <%= roadmap.purpose %>
                     <% end %>
@@ -50,7 +50,7 @@
             <div class="media text-muted pt-3">
               <i class="mr-2 fas fa-signal fa-2x"></i>
                 <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <h3 class="d-block text-gray-dark"> Target </h3>
+                  <h4 class="d-block text-gray-dark"> 目標 </h4>
                     <% if roadmap.target %>
                       <%= roadmap.target %>
                     <% end %>
@@ -72,11 +72,16 @@
           </span>
         </div>
       </div>
+        <% if current_user?(roadmap.user) %>
+        <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+          <%= link_to "このロードマップを学ぶ", user_roadmap_steps_path(@user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+        </div>
+        <% end %>
     </div>
   </li>
 <% else %> 
   <li id="roadmap-<%= roadmap.id %>">
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="p-3 bg-white rounded shadow-sm">
       <div class="row">
         <div class="col-md-12">
           <div class="my-3 p-3 bg-white rounded shadow-sm panel-group" id="accordion">
@@ -87,9 +92,9 @@
               </div>
               <i class="mr-2 far fa-newspaper fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray panel-heading">
-                <h3 class="d-block text-gray-dark panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= roadmap.id %>">Title</a>
-                </h3>
+                <h4 class="d-block text-gray-dark panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= roadmap.id %>">タイトル</a>
+                </h4>
                   <%= roadmap.title %>
               </div>
             </div>
@@ -99,7 +104,7 @@
           <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3 panel-body">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
-                <p class= "h3 d-block text-gray-dark">Cover</p>
+                <p class= "h4 d-block text-gray-dark"> 表紙 </p>
                   <div class="row mr-4">
                     <% if roadmap.picture? %>
                       <%= image_tag roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
@@ -113,7 +118,7 @@
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-bullseye fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <p class= "h3 d-block text-gray-dark">Purpose</p>
+                  <p class= "h4 d-block text-gray-dark"> 目的 </p>
                     <%= roadmap.purpose %>
               </div>
             </div>
@@ -122,7 +127,7 @@
             <div class="media text-muted pt-3">
             <i class="mr-2 fas fa-signal fa-2x"></i>
               <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <p class= "h3 d-block text-gray-dark">Target</p>
+                  <p class= "h4 d-block text-gray-dark"> 目標 </p>
                     <%= roadmap.target %>
               </div>
             </div>
@@ -133,6 +138,9 @@
         <span class="timestamp panel-body">
           Updated <%= time_ago_in_words(roadmap.updated_at) %> ago.
         </span>
+        <div class="my-3 roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+          <%= link_to "ロードマップの詳細を見る", user_roadmap_steps_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+        </div>
       </div>
     </div>
   </li>

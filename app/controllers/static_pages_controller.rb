@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
       @feed_items = current_user.feed.paginate(page: params[:page])
       @user = current_user
       @roadmap  = current_user.roadmaps.order(updated_at: :desc).first
+      @step  = @roadmap.steps.build
     end
   end
   

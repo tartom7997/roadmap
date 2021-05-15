@@ -7,9 +7,15 @@ class RoadmapsController < ApplicationController
       @roadmaps = Roadmap.paginate(page: params[:page], per_page: 5)
     end
 
-    def show
-      @user = User.find(params[:id])
+    def all
+      @user = User.find(params[:user_id])
       @roadmaps = @user.roadmaps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
+    end
+
+    def show
+      @user = User.find(params[:user_id])
+      @roadmaps = @user.roadmaps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
+      @roadmap = Roadmap.find(params[:id])
     end
 
     def new
@@ -20,7 +26,7 @@ class RoadmapsController < ApplicationController
       @roadmap = current_user.roadmaps.build(roadmap_params)
       if @roadmap.save
         flash[:success] = "新しいロードマップが作成されました！"
-        redirect_to user_roadmap_url(id: current_user, user_id: current_user)
+        redirect_to all_user_roadmaps_url(user_id: current_user)
       else
         flash[:danger] = "新しいロードマップの作成に失敗しました。"
         render 'new'
@@ -35,7 +41,7 @@ class RoadmapsController < ApplicationController
       if @roadmap.update(roadmap_params)
         # 更新に成功した場合を扱う。
         flash[:success] = "プロフィールが更新されました。"
-        redirect_to user_roadmap_path(id: current_user, user_id: current_user)
+        redirect_to all_user_roadmaps_url(user_id: current_user)
       else
         render 'edit'
       end
@@ -52,7 +58,7 @@ class RoadmapsController < ApplicationController
       @roadmap = Roadmap.find(params[:id])
       if @roadmap.destroy
         flash[:success] = "ロードマップが削除されました。"
-        redirect_to user_roadmap_url(id: current_user, user_id: current_user)
+        redirect_to all_user_roadmaps_url(user_id: current_user)
       else
         flash[:error] = "ロードマップが削除されませんでした。"
       rrender 'show'
