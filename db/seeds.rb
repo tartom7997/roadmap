@@ -44,3 +44,13 @@ User.create!(name:  "Tester",
 # followers = users[3..40]
 # following.each { |followed| user.follow(followed) }
 # followers.each { |follower| follower.follow(user) }
+
+# カテゴリー
+Category.create!(   
+    [               {name:  "本の紹介や書評"},
+                    {name:  "Podcastや音声"},
+                    {name:  "Youtubeや動画"},
+                    {name:  "ブログや参考記事"},
+                    {name:  "あなたの体験談やノウハウのシェア"}
+    ]
+                    )
