@@ -3,10 +3,12 @@ class StaticPagesController < ApplicationController
   def home
     if logged_in?
       @micropost  = current_user.microposts.build
-      @feed_items = current_user.feed.paginate(page: params[:page])
+      # micropostのフィード
+      # @feed_items = current_user.feed.paginate(page: params[:page])
       @user = current_user
-      @roadmap  = current_user.roadmaps.order(updated_at: :desc).first
-      @step  = @roadmap.steps.build
+      @roadmap_first  = current_user.roadmaps.order(updated_at: :desc).first
+      @post = current_user.feed_post.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+      # @feed_post_items = current_user.feed_post.paginate(page: params[:page]).order(created_at: :desc)
     end
   end
   

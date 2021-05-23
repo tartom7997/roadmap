@@ -1,13 +1,16 @@
 <li id="step-<%= step.id %>">
   <div class="p-3 bg-white rounded shadow-sm">
     <div class="my-3 p-3 bg-white rounded shadow-sm">
-      <div class="media text-muted pt-3">
+      <div class="media pt-3">
         <i class="mr-2 far fa-newspaper fa-2x"></i>
         <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
         <% if @roadmap.steps.any? %>
-          <h4 class="d-block text-gray-dark"> <%= step.name %></h4>
+          <h4 class="d-block"> <%= step.name %></h4>
           <%= step.content %>
           <% end %>
+          <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+            <%= link_to "このステップの独学をする", user_roadmap_step_posts_path(@user, @roadmap, step.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+          </div>
         </div>
       </div>
     </div>

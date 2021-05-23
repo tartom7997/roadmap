@@ -26,3 +26,5 @@ require ('channels/count_100.js')
 
 import 'bootstrap'
 import '../src/application.scss'
+require("trix")
+require("@rails/actiontext")

@@ -1,5 +1,7 @@
 <div class="container share-container">
   <div class="row">
+    <%= link_to "トップページ", root_path, class: :logo %>
+    <% breadcrumb :root %>
     <%= render 'shared/my_roadmaps' %>
     <div class="col-md-12">
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
@@ -8,12 +10,9 @@
           タイムライン
         </div>
       </div>
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <div>
         <section class="border-bottom">
-          <%= render 'shared/micropost_form' %>
-        </section>
-        <section>
-          <%= render 'shared/feed' %>
+          <%= render 'shared/feed_post' %>
         </section>
       </div>
     </div>

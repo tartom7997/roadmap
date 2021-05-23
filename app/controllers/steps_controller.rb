@@ -25,13 +25,12 @@ class StepsController < ApplicationController
       @roadmap  = Roadmap.find(params[:roadmap_id])
       @step = @roadmap.steps.build(step_params)
         if @step.save
-            flash[:success] = "投稿が作成されました！"
+            flash[:success] = "ステップが作成されました！"
             redirect_to user_roadmap_steps_path(@user, @roadmap)
         else
-            @feed_items = []
-            # render 'static_pages/home'
-            flash[:danger] = "投稿に失敗しました。"
-            redirect_to user_roadmap_steps_path(@user, @roadmap)
+            flash[:danger] = "ステップの作成に失敗しました。"
+            @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
+            render 'index'
         end
     end
 
@@ -42,7 +41,7 @@ class StepsController < ApplicationController
       @step = Step.find(params[:id])
       if @step.update(step_params)
         # 更新に成功した場合を扱う。
-        flash[:success] = "プロフィールが更新されました。"
+        flash[:success] = "ステップが更新されました。"
         redirect_to user_roadmap_steps_path(@user, @roadmap)
       else
         render 'edit'
@@ -56,7 +55,8 @@ class StepsController < ApplicationController
         redirect_to user_roadmap_steps_url(id: @step, user_id: current_user)
       else
         flash[:error] = "ステップが削除されませんでした。"
-      rrender 'index'
+        @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
+        render 'index'
       end
     end
 

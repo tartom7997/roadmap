@@ -124,6 +124,24 @@ p {
   background: url(growthmap_logo_02_mini.png) left top/150px auto no-repeat;
 }
 
+// パンくずリスト https://qiita.com/masaway-t10801606/items/aa39b789e47b69039278
+.logo {
+  margin-left: 3vw;
+}
+
+.logo a {
+  margin-right: 0.5vw;
+}
+
+.current {
+  font-weight: bold;
+  margin-right: 1vw;
+}
+
+.logo:hover,.logo a:hover {
+  color: Chocolate;
+}
+
 /* footer */
 
 footer {

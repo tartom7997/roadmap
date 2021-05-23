@@ -30,16 +30,12 @@
 
       <%= render 'shared/users_roadmaps' %>
 
-      <% if @user.microposts.any? %>
         <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
           <i class="mr-2 fas fa-id-card fa-2x"></i>
-          <h1 class="mb-0 text-white lh-100">メモ (<%= @user.microposts.count %>)</h1>
+          <h1 class="mb-0 text-white lh-100"> 独学の記録 (<%= @my_post.count %>)</h1>
         </div>
-        <ol class="microposts">
-          <%= render @microposts %>
-        </ol>
-        <%= will_paginate @microposts %>
-      <% end %>
-    </div>
+        <%= render 'shared/feed_my_post' %>
+
+        </div>
   </div>
 </div>

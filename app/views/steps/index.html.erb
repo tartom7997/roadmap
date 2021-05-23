@@ -1,5 +1,7 @@
 <% provide(:title, 'ロードマップのステップ') %>
   <div class="container share-container">
+  <% breadcrumb :steps_show  %>
+  <%= breadcrumbs separator: " > " , class: :logo %>
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
       <i class="mr-2 fas fa-road fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">

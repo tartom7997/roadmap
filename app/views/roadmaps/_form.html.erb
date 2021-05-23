@@ -1,26 +1,28 @@
-<%= form_with model:[@user, @roadmap], method: :post, url: yield(:url), local: true do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+  <%= form_with model:[@user, @roadmap], method: :post, url: yield(:url), local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      
+      <%= f.label :ロードマップのタイトル, class: 'h2 mt-4' %>
+      <p>独学する対象を設定しましょう。例えば、「英語」や「営業」、「デザイン」や「プログラミング」など、皆さんの人生の幅を広げるために学んでいることのゴールまでの道筋のタイトルを設定します。</p>
+      <%= f.text_area :title, autocomplete: 'off', class: 'form-control mb-3 js-text_50', :placeholder => "30歳未経験からウェブマーケティングで毎月10万円稼ぐまでのロードマップ" %>
+      <P class="js-text-count_50 pull-right"></P>
     
-    <%= f.label :ロードマップのタイトル, class: 'h2 mt-4' %>
-    <p>独学する対象を設定しましょう。例えば、「英語」や「営業」、「デザイン」や「プログラミング」など、皆さんの人生の幅を広げるために学んでいることのゴールまでの道筋のタイトルを設定します。</p>
-    <%= f.text_area :title, autocomplete: 'off', class: 'form-control mb-3 js-text_50', :placeholder => "30歳未経験からウェブマーケティングで毎月10万円稼ぐまでのロードマップ" %>
-    <P class="js-text-count_50 pull-right"></P>
-  
-    <%= f.label :ロードマップを学ぶ目的, class: 'h2 mt-4' %>
-    <p>独学の目的を定義して、勉強や活動を積み上げていきましょう。例えば、英語を学ぶことで国内外にビジネスの幅を広げるためなど、定性的なものがおすすめです。</p>
-    <%= f.text_area :purpose, autocomplete: 'off', class: 'form-control mb-3 js-text_100', :placeholder => "自分の経験を軸に世の中に役立つ情報を継続的に発信するため" %>
-    <P class="js-text-count_100 pull-right"></P>
+      <%= f.label :ロードマップを学ぶ目的, class: 'h2 mt-4' %>
+      <p>独学の目的を定義して、勉強や活動を積み上げていきましょう。例えば、英語を学ぶことで国内外にビジネスの幅を広げるためなど、定性的なものがおすすめです。</p>
+      <%= f.text_area :purpose, autocomplete: 'off', class: 'form-control mb-3 js-text_100', :placeholder => "自分の経験を軸に世の中に役立つ情報を継続的に発信するため" %>
+      <P class="js-text-count_100 pull-right"></P>
 
-    <%= f.label :ロードマップを達成するための目標, class: 'h2 mt-4' %>
-    <p>目的を達成するための目印として目標を定義しましょう。例えば、10月までにTOEIC900点を取るなど、定量的なものがおすすめです。</p>
-    <%= f.text_area :target, autocomplete: 'off', class: 'form-control mb-3 js-text_100', :placeholder => "まずは、20XX年までにウェブメディアを立ち上げる。" %>
-    <P class="js-text-count_100 pull-right"></P>
+      <%= f.label :ロードマップを達成するための目標, class: 'h2 mt-4' %>
+      <p>目的を達成するための目印として目標を定義しましょう。例えば、10月までにTOEIC900点を取るなど、定量的なものがおすすめです。</p>
+      <%= f.text_area :target, autocomplete: 'off', class: 'form-control mb-3 js-text_100', :placeholder => "まずは、20XX年までにウェブメディアを立ち上げる。" %>
+      <P class="js-text-count_100 pull-right"></P>
 
-    <%= f.label :ロードマップのカバー, class: 'h2 mt-4' %>
-    <p>このロードマップの表紙となるような画像があれば設定してみてください。</p>
-    <span class="picture">
-    <%= f.file_field :picture %>
-    </span>
+      <%= f.label :ロードマップのカバー, class: 'h2 mt-4' %>
+      <p>このロードマップの表紙となるような画像があれば設定してみてください。</p>
+      <span class="picture">
+      <%= f.file_field :picture %>
+      </span>
 
-    <%= f.submit "Submit", class: "btn btn-primary" %>
-  <% end %>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
+  </div>

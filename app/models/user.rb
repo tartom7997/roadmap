@@ -116,6 +116,14 @@ class User < ApplicationRecord
     .or(Micropost.where(user_id: id))
   end
 
+  # ユーザーのステータスフィードを返す
+  def feed_post
+    Post.joins({:step => {:roadmap => :user}}).where(:users => {:id => active_relationships.select(:followed_id)}).or(Post.joins({:step => {:roadmap => :user}}).where(:users => {id: id}))
+  end
+
+  def feed_my_post
+    Post.joins({:step => {:roadmap => :user}}).where(:users => {id: id})
+  end
 
   # ユーザーをフォローする
   def follow(other_user)
@@ -163,12 +171,6 @@ class User < ApplicationRecord
       end
     end
   end
-
-  # # ユーザーのステータスフィードを返す
-  # def feed_roadmap
-  #   Roadmap.where(user_id: active_relationships.select(:followed_id))
-  #   .or(Roadmap.where(user_id: id))
-  # end
 
   private
 

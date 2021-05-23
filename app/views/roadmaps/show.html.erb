@@ -4,9 +4,9 @@
       <i class="mr-2 fas fa-road fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">
         <% if current_user?(@user) %>
-          Your Roadmaps (<%= @user.roadmaps.count %>)
+          ロードマップ (<%= @user.roadmaps.count %>)
         <% else %>
-          Roadmaps (<%= @user.roadmaps.count %>)
+          ロードマップ (<%= @user.roadmaps.count %>)
         <% end %>
       </div>
     </div>

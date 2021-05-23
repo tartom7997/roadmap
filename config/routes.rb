@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'categories/index'
+  get 'categories/edit'
   get 'sessions/new'
   root 'static_pages#home'
   get  '/help',    to: 'static_pages#help'
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   post '/users/:user_id/roadmaps/:roadmap_id/steps', to: 'steps#create'
   patch '/users/:user_id/roadmaps/:roadmap_id/steps/:id/edit', to: 'steps#update'
   get  '/users/:user_id/roadmaps/all', to: 'roadmaps#all'
+  patch '/users/:user_id/roadmaps/:roadmap_id/steps/:step_id/posts/:id/edit', to: 'posts#update'
 
   resources :users do
     member do
@@ -42,7 +45,9 @@ Rails.application.routes.draw do
       member do
         patch :learnig
       end
-      resources :steps
+      resources :steps do
+        resources :posts
+      end
     end
   end
 
@@ -52,4 +57,5 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :roadmaps,            only: [:index]
+  resources :categories,          except: [:new, :show]
 end

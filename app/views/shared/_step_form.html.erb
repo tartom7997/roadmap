@@ -5,11 +5,15 @@
         <%= form_with model:[@user, @roadmap, @step], method: :post, local: true do |f| %>
             <%= render 'shared/error_messages', object: f.object %>
               <%= f.label :ステップのタイトル, class: 'h2 mt-4' %>
-                <p>ロードマップにおける学習のステップを記録しましょう。学習ステップを初級・中級・上級のように分けても分かりやすいです！</p>
-                <%= f.text_field :name, class: 'form-control', placeholder: "学習のステップのタイトルを作成しましょう！" %>
+                <p>ロードマップにおける学習のステップを記録しましょう。学習ステップを初級・中級・上級のように分けても整理がしやすいでしょう。</p>
+                <%= f.text_field :name, class: 'form-control js-text_50', placeholder: "学習のステップのタイトルを作成しましょう！" %>
+                <P class="js-text-count_50 pull-right"></P>
+
               <%= f.label :ステップの概要, class: 'h2 mt-4' %>
-                <p>ロードマップにおける学習のステップを概要を記載しましょう。それぞれのステップで学んでいきたいことを書くのがおすすめです！</p>
-                <%= f.text_area :content, placeholder: "学習のステップの概要説明を作成しましょう！。" %>
+                <p>ロードマップにおける学習のステップを概要を記載しましょう。それぞれのステップで学んでいきたいことを書くのがおすすめです。</p>
+                <%= f.text_area :content, placeholder: "学習のステップの概要説明を作成しましょう！", class: 'js-text' %>
+                <P class="js-text-count pull-right"></P>
+
             <%= f.submit "作成する", class: 'form-control', class: "btn btn-primary mt-3" %>
           <% end %>
       </div>

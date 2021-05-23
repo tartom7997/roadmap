@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="row">
+      <div class="col-md-12">
+        <%= form_with model:[@user, @roadmap, @step, @post], method: :post, local: true do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            
+              <%= f.label :今回の独学の記録のカテゴリー, class: 'h2 mt-4' %>
+                <p>他の独学者にシェアするために、独学のために参考にしたものがあれば、それに該当するカテゴリーを選んでください。もしくは、体験談やノウハウのシェアの場合は、そちらを選択ください。</p>
+                <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: '選択してください' }, class: 'form-control'%>
+
+              <%= f.label :参考物のURL, class: 'h2 mt-4' %>
+                <p>他の独学者にシェアするために、上記の参考物に関連するURLを記載ください。</p>
+                <%= f.text_field :url, class: 'form-control', placeholder: "https://" %>
+
+              <%= f.label :今回の独学記録のタイトル, class: 'h2 mt-4' %>
+                <p>学習のステップに関連する独学の記録を残しましょう。学んだことを一言で表すと整理がしやすいでしょう。</p>
+                <%= f.text_field :title, class: 'form-control js-text_50', placeholder: "今回の独学記録のタイトルを作成しましょう！" %>
+                <P class="js-text-count_50 pull-right"></P>
+
+              <%= f.label :今回学んだこと, class: 'h2 mt-4' %>
+                <p>今回の記録で学んだことを記録しましょう。</p>
+                <%= f.rich_text_area :content, placeholder: "本、音声、記事、動画などのURLと共に、あなたの目標の達成に役立ったことを共有し、他の独学者に貢献しましょう。もしくは、個人的な体験談、テクニック、フレームワーク、マインドセット、コツ、ノウハウ、書評など、あなたの目標の達成に役立ったことを投稿し、他の独学者に貢献しましょう！" %>
+
+            <%= f.submit "作成する", class: 'form-control', class: "btn btn-primary mt-3" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

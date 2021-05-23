@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     # @picture = User.picture
     # @profile = User.profile
     # @videos = User.videos.order("created_at DESC")
+    @my_post = @user.feed_my_post.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   def new

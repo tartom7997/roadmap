@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col-md-12">
         <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <div class="media text-muted pt-3">
+          <div class="media pt-3">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <h4 class="d-block text-gray-dark"> タイトル </h4>
+              <h4 class="d-block"> タイトル </h4>
                 <% if @user.roadmaps.any? %>
                   <%= @roadmap.title %>
                 <% end %>
@@ -18,7 +18,7 @@
         <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3">
           <i class="mr-2 far fa-newspaper fa-2x"></i>
           <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
-            <h4 class="d-block text-gray-dark"> 表紙 </h4>
+            <h4 class="d-block"> 表紙 </h4>
               <div class="row mr-4">
                 <% if @user.roadmaps.any? %>
                   <% if @roadmap.picture? %>
@@ -33,10 +33,10 @@
       </div>
       <div class="col-md-9">
         <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <div class="media text-muted pt-3">
+          <div class="media pt-3">
           <i class="mr-2 fas fa-bullseye fa-2x"></i>
             <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <h4 class="d-block text-gray-dark"> 目的 </h4>
+              <h4 class="d-block"> 目的 </h4>
                 <% if @user.roadmaps.any? %>
                   <%= @roadmap.purpose %>
                 <% end %>
@@ -44,10 +44,10 @@
           </div>
         </div>
         <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <div class="media text-muted pt-3">
+          <div class="media pt-3">
           <i class="mr-2 fas fa-signal fa-2x"></i>
             <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <h4 class="d-block text-gray-dark"> 目標 </h4>
+              <h4 class="d-block"> 目標 </h4>
                 <% if @user.roadmaps.any? %>
                   <%= @roadmap.target %>
                 <% end %>

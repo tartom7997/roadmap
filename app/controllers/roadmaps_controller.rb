@@ -40,7 +40,7 @@ class RoadmapsController < ApplicationController
       @roadmap = Roadmap.find(params[:id])
       if @roadmap.update(roadmap_params)
         # 更新に成功した場合を扱う。
-        flash[:success] = "プロフィールが更新されました。"
+        flash[:success] = "ロードマップが更新されました。"
         redirect_to all_user_roadmaps_url(user_id: current_user)
       else
         render 'edit'
@@ -61,7 +61,7 @@ class RoadmapsController < ApplicationController
         redirect_to all_user_roadmaps_url(user_id: current_user)
       else
         flash[:error] = "ロードマップが削除されませんでした。"
-      rrender 'show'
+        render 'show'
       end
     end
 
