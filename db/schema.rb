@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_232623) do
+ActiveRecord::Schema.define(version: 2021_05_25_062815) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,31 @@ ActiveRecord::Schema.define(version: 2021_05_16_232623) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "hashtag_post_relations", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "hashtag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashtag_id"], name: "index_hashtag_post_relations_on_hashtag_id"
+    t.index ["post_id"], name: "index_hashtag_post_relations_on_post_id"
+  end
+
+  create_table "hashtag_roadmap_relations", force: :cascade do |t|
+    t.integer "roadmap_id", null: false
+    t.integer "hashtag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashtag_id"], name: "index_hashtag_roadmap_relations_on_hashtag_id"
+    t.index ["roadmap_id"], name: "index_hashtag_roadmap_relations_on_roadmap_id"
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
+  end
+
   create_table "microposts", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -74,6 +99,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_232623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "category_id"
+    t.string "hashbody"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["step_id"], name: "index_posts_on_step_id"
   end
@@ -96,6 +122,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_232623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "picture"
+    t.string "hashbody"
     t.index ["user_id", "created_at"], name: "index_roadmaps_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_roadmaps_on_user_id"
   end
@@ -134,6 +161,10 @@ ActiveRecord::Schema.define(version: 2021_05_16_232623) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "hashtag_post_relations", "hashtags"
+  add_foreign_key "hashtag_post_relations", "posts"
+  add_foreign_key "hashtag_roadmap_relations", "hashtags"
+  add_foreign_key "hashtag_roadmap_relations", "roadmaps"
   add_foreign_key "microposts", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "steps"

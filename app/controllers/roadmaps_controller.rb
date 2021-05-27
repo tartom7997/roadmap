@@ -65,13 +65,24 @@ class RoadmapsController < ApplicationController
       end
     end
 
+    def hashtag
+      if params[:name].nil?
+        @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.roadmaps.count}
+      else
+        @hashtag = Hashtag.find_by(hashname: params[:name])
+        @roadmap = @hashtag.roadmaps.paginate(page: params[:page], per_page: 5).reverse_order
+        @hashtags_paginate = Hashtag.all.paginate(page: params[:page], per_page: 50)
+        @hashtags = @hashtags_paginate.all.to_a.group_by{ |hashtag| hashtag.roadmaps.count}
+      end
+    end
+
     private
   
       def roadmap_params
         if params[:user]
-        params.require(:user).permit(:title, :purpose, :target, :picture).merge(user_id: current_user.id)
+        params.require(:user).permit(:title, :purpose, :target, :picture, :hashbody, hashtag_ids: []).merge(user_id: current_user.id)
         else params[:roadmap]
-        params.require(:roadmap).permit(:title, :purpose, :target, :picture).merge(user_id: current_user.id)
+        params.require(:roadmap).permit(:title, :purpose, :target, :picture, :hashbody, hashtag_ids: []).merge(user_id: current_user.id)
         end
       end
 
@@ -79,4 +90,5 @@ class RoadmapsController < ApplicationController
         @roadmap = current_user.roadmaps.find_by(id: params[:id])
         redirect_to root_url if @roadmap.nil?
       end
+
 end

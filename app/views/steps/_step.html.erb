@@ -9,13 +9,13 @@
           <%= step.content %>
           <% end %>
           <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
-            <%= link_to "このステップの独学をする", user_roadmap_step_posts_path(@user, @roadmap, step.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+            <%= link_to "このステップの独学をする", all_user_roadmap_step_posts_path(@user, @roadmap, step.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
           </div>
         </div>
       </div>
     </div>
     <span class="timestamp text-right">
-      <%= time_ago_in_words(step.created_at) %> ago.
+      作成日：<%= step.created_at.to_s(:datetime) %>
       <% if current_user?(@user) %>
         <%= link_to "編集する", edit_user_roadmap_step_path(@user, @roadmap, step.id), method: :get,
         data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>

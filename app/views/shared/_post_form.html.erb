@@ -22,6 +22,11 @@
                 <p>今回の記録で学んだことを記録しましょう。</p>
                 <%= f.rich_text_area :content, placeholder: "本、音声、記事、動画などのURLと共に、あなたの目標の達成に役立ったことを共有し、他の独学者に貢献しましょう。もしくは、個人的な体験談、テクニック、フレームワーク、マインドセット、コツ、ノウハウ、書評など、あなたの目標の達成に役立ったことを投稿し、他の独学者に貢献しましょう！" %>
 
+              <%= f.label :ロードマップのハッシュタグ（分類）, class: 'h2 mt-4' %>
+                <p>他の方に分かりやすいように、独学の記録の分類を「#〇〇」というハッシュタグ形式で記入してみましょう。「#」は半角、数字を入力する場合も半角のみ入力可能です。</p>
+                <%= f.text_field :hashbody, autocomplete: 'off', class: 'form-control mb-3 js-text_50', :placeholder => "#マーケティング #英語学習 etc... " %>
+                <P class="js-text-count_50 pull-right"></P>
+
             <%= f.submit "作成する", class: 'form-control', class: "btn btn-primary mt-3" %>
           <% end %>
       </div>

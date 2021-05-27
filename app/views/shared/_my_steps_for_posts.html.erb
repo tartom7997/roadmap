@@ -9,6 +9,15 @@
       <h4 class="d-block"> <%= @step.name %></h4>
       <%= @step.content %>
       <% end %>
+      <div class="mt-3 timestamp text-right">
+      作成日：<%= @step.created_at.to_s(:datetime) %>
+      <% if current_user?(@user) %>
+        <%= link_to "編集する", edit_user_roadmap_step_path(@user, @roadmap, @step.id), method: :get,
+        data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
+        <%= link_to "削除する", user_roadmap_step_path(@user, @roadmap, @step.id), method: :delete,
+        data: { confirm: "本当に消しますか?" } %>
+      <% end %>
+    </div>
     </div>
   </div>
 </div>

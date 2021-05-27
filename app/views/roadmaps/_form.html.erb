@@ -17,11 +17,17 @@
       <%= f.text_area :target, autocomplete: 'off', class: 'form-control mb-3 js-text_100', :placeholder => "まずは、20XX年までにウェブメディアを立ち上げる。" %>
       <P class="js-text-count_100 pull-right"></P>
 
+      <%= f.label :ロードマップのハッシュタグ（分類）, class: 'h2 mt-4' %>
+      <p>他の方に分かりやすいように、独学の記録の分類を「#〇〇」というハッシュタグ形式で記入してみましょう。「#」は半角、数字を入力する場合も半角のみ入力可能です。</p>
+      <%= f.text_field :hashbody, autocomplete: 'off', class: 'form-control mb-3 js-text_50', :placeholder => "#マーケティング #英語学習 etc... " %>
+      <P class="js-text-count_50 pull-right"></P>
+      
       <%= f.label :ロードマップのカバー, class: 'h2 mt-4' %>
-      <p>このロードマップの表紙となるような画像があれば設定してみてください。</p>
+      <p>このロードマップの表紙となるような画像があれば設定してみてください。著作権にはご注意ください。</p>
       <span class="picture">
       <%= f.file_field :picture %>
       </span>
+
 
       <%= f.submit "Submit", class: "btn btn-primary" %>
     <% end %>

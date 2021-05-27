@@ -4,7 +4,7 @@
       <%= link_to picture_for(@roadmap.user), @roadmap.user %>
       <%= link_to @roadmap.user.name, @roadmap.user%>
       <p class="border-bottom border-gray">
-        ロードマップ：<%= link_to @roadmap.title, user_roadmap_steps_path %> > ステップ：<%= link_to @step.name, user_roadmap_step_posts_path %>
+        ロードマップ：<%= link_to @roadmap.title, user_roadmap_steps_path %> > ステップ：<%= link_to @step.name, all_user_roadmap_step_posts_path %>
       </p>
       <div class="media pt-3 panel panel-default">
         <i class="mr-2 far fa-newspaper fa-2x"></i>
@@ -15,6 +15,7 @@
               <%= post.title %>
             </a>
           </h4>
+            <p class="mb-1 text-break border-bottom border-gray">ハッシュタグ：<%= render_with_hashtags_post(post.hashbody) %></p>
             <p class="mb-1 text-break border-bottom border-gray">参考URL：<%= post.url %></p>
             <p class="mb-1 border-bottom border-gray">独学カテゴリー；<%= categorise(post) %></p>
           <div id="collapse-<%= post.id %>" class="panel-collapse collapse in">
@@ -27,7 +28,7 @@
       </div>
     </div>
     <span class="timestamp text-right">
-      <%= time_ago_in_words(post.created_at) %> ago.
+      作成日：<%= post.created_at.to_s(:datetime) %>
       <% if current_user?(@user) %>
         <%= link_to "編集する", edit_user_roadmap_step_post_path(@user, @roadmap, @step, post.id), method: :get,
         data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>

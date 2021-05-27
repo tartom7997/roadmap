@@ -12,8 +12,8 @@ crumb :steps_show do
   parent :roadmaps_all
 end
 
-crumb :posts_index do
-  link "独学の記録", user_roadmap_step_posts_path
+crumb :posts_all do
+  link "独学の記録", all_user_roadmap_step_posts_path
   parent :steps_show
 end
 

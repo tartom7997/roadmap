@@ -7,6 +7,9 @@
     <div class="row">
       <div class="col-md-12">
         <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <% if @user.roadmaps.any? %>
+          <%= render_with_hashtags_roadmap(@roadmap_first.hashbody) %>
+        <% end %>
           <div class="media pt-3">
             <i class="mr-2 far fa-newspaper fa-2x"></i>
             <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
@@ -58,7 +61,23 @@
             </div>
           </div>
         </div>
+        <% if @user.roadmaps.any? %>
+          <div class="col-md-12 my-3 text-right">
+            更新日：<%= @roadmap_first.updated_at.to_s(:datetime) %>
+              <% if current_user?(@roadmap_first.user) %>
+                <%= link_to "編集する", edit_user_roadmap_path(@user, @roadmap_first.id), method: :get,
+                data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
+                <%= link_to "削除する", user_roadmap_path(@user, @roadmap_first.id), method: :delete,
+                                                data: { confirm: "本当に消しますか?" } %>
+              <% end %>
+          </div>
+        <% end %>
       </div>
+      <% if @user.roadmaps.any? %>
+      <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+        <%= link_to "このロードマップを学ぶ", user_roadmap_steps_path(@user, @roadmap_first.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ class StepsController < ApplicationController
     def index
       @user = User.find(params[:user_id])
       @roadmap = Roadmap.find(params[:roadmap_id])
-      @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
+      @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("created_at ASC")
       @step = @roadmap.steps.build
     end
 
@@ -29,7 +29,7 @@ class StepsController < ApplicationController
             redirect_to user_roadmap_steps_path(@user, @roadmap)
         else
             flash[:danger] = "ステップの作成に失敗しました。"
-            @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
+            @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("created_at ASC")
             render 'index'
         end
     end
@@ -55,7 +55,7 @@ class StepsController < ApplicationController
         redirect_to user_roadmap_steps_url(id: @step, user_id: current_user)
       else
         flash[:error] = "ステップが削除されませんでした。"
-        @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
+        @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("created_at ASC")
         render 'index'
       end
     end

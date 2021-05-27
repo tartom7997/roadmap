@@ -20,5 +20,7 @@ module SampleApp
 
     # config.autoloader = :classic # https://stackoverflow.com/questions/57277351/rails-6-zeitwerknameerror-doesnt-load-class-from-module
 
+    config.time_zone = "Tokyo"
+
   end
 end

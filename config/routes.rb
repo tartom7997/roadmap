@@ -28,7 +28,12 @@ Rails.application.routes.draw do
   post '/users/:user_id/roadmaps/:roadmap_id/steps', to: 'steps#create'
   patch '/users/:user_id/roadmaps/:roadmap_id/steps/:id/edit', to: 'steps#update'
   get  '/users/:user_id/roadmaps/all', to: 'roadmaps#all'
+  get  '/users/:user_id/roadmaps/:roadmap_id/steps/:step_id/posts/all', to: 'posts#all'
   patch '/users/:user_id/roadmaps/:roadmap_id/steps/:step_id/posts/:id/edit', to: 'posts#update'
+  get '/roadmap/hashtag/:name' => 'roadmaps#hashtag'
+  get '/roadmap/hashtag' => 'roadmaps#hashtag'
+  get '/post/hashtag/:name' => 'posts#hashtag'
+  get '/post/hashtag' => 'posts#hashtag'
 
   resources :users do
     member do
@@ -46,7 +51,11 @@ Rails.application.routes.draw do
         patch :learnig
       end
       resources :steps do
-        resources :posts
+        resources :posts do
+          collection do
+            get   :all
+          end
+        end
       end
     end
   end
@@ -57,5 +66,6 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :roadmaps,            only: [:index]
+  resources :posts,               only: [:index]
   resources :categories,          except: [:new, :show]
 end

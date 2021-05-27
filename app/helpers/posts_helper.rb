@@ -13,4 +13,9 @@ module PostsHelper
           'あなたの体験談やノウハウのシェア'
         end
       end
+
+      def render_with_hashtags_post(hashbody)
+        hashbody.gsub(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/) { |word| link_to word, "/post/hashtag/#{word.delete("#")}",data: {"turbolinks" => false} }.html_safe
+      end
+
 end
