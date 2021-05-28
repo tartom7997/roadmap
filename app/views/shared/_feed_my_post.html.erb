@@ -4,11 +4,11 @@
     <div class="my-3 p-3 bg-white rounded shadow-sm panel-group" id="accordion"">
       <%= link_to picture_for(post.step.roadmap.user), post.step.roadmap.user %>
       <%= link_to post.step.roadmap.user.name, post.step.roadmap.user%>
-      <p class="border-bottom border-gray">
-        ロードマップ：<%= link_to post.step.roadmap.title, user_roadmap_steps_path(roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id) %> > ステップ：<%= link_to post.step.name, all_user_roadmap_step_posts_path(step_id: post.step.id,roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id) %>
+      <p class="mt-3 border-bottom border-gray">
+        <i class="mr-2 fas fa-road fa-1x"></i><%= link_to post.step.roadmap.title, user_roadmap_steps_path(roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id) %> > <i class="mr-2 fas fa-shoe-prints fa-1x"></i><%= link_to post.step.name, all_user_roadmap_step_posts_path(step_id: post.step.id,roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id) %>
       </p>
       <div class="media pt-3 panel panel-default">
-        <i class="mr-2 far fa-newspaper fa-2x"></i>
+        <i class="mr-2 fas fa-pen-alt fa-2x"></i>
         <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray panel-heading">
         <% if @my_post.any? %>
           <h4 class="d-block panel-title">
@@ -16,9 +16,9 @@
               <%= post.title %>
             </a>
           </h4>
-            <p class="mb-1 text-break border-bottom border-gray">ハッシュタグ：<%= render_with_hashtags_post(post.hashbody) %></p>
-            <p class="mb-1 text-break border-bottom border-gray">参考URL：<%= post.url %></p>
-            <p class="mb-1 border-bottom border-gray">独学カテゴリー；<%= categorise(post) %></p>
+            <p class="mb-1 text-break border-bottom border-gray"><i class="mr-2 fas fa-hashtag fa-1x"></i><%= render_with_hashtags_post(post.hashbody) %></p>
+            <p class="mb-1 text-break border-bottom border-gray"><i class="mr-2 fas fa-external-link-alt fa-1x"></i><%= link_to post.url, post.url %></p>
+            <p class="mb-1 border-bottom border-gray"><i class="mr-2 fas fa-filter fa-1x"></i>；<%= categorise(post) %></p>
           <div id="collapse-<%= post.id %>" class="panel-collapse collapse in">
             <div class="panel-body">
               <%= post.content %>

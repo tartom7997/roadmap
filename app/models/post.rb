@@ -5,8 +5,8 @@ class Post < ApplicationRecord
   validates :step_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, presence: true
-  validates :url, presence: true
-  validates :hashbody, presence: true, length: { maximum: 50 }, format: { without: /＃/, message: ' # は半角で入力してください' }
+  validates :url, presence: true, format: { with: /\A#{URI::regexp(%w(http https))}\z/, message: 'URLはhttpの形式で入力してください' }
+  validates :hashbody, presence: true, length: { maximum: 50 }, format: { without: /＃/, message: '# は半角で入力してください' }
   validates :hashbody, format: { without: /[０-９]/, message: 'の数字は半角で入力してください' }
   has_rich_text :content
   has_many :hashtag_post_relations, dependent: :destroy

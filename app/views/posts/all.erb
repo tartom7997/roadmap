@@ -3,7 +3,7 @@
   <% breadcrumb :posts_all  %>
   <%= breadcrumbs separator: " > " , class: :logo %>
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
-      <i class="mr-2 fas fa-road fa-2x"></i>
+      <i class="mr-2 fas fa-shoe-prints fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">
         <% if current_user?(@user) %>
           ステップの記録
@@ -16,7 +16,7 @@
     <%= render 'shared/my_steps_for_posts' %>
 
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
-      <i class="mr-2 fas fa-shoe-prints fa-2x"></i>
+      <i class="mr-2 fas fa-pen-alt fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">
         独学の記録 (<%= @step.posts.count %>)
       </div>
