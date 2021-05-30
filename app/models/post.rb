@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   before_save { self.hashbody = hashbody.downcase }
   belongs_to :step
   belongs_to :category
+  mount_uploader :picture, PictureUploader
   validates :step_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, presence: true
@@ -11,7 +12,7 @@ class Post < ApplicationRecord
   has_rich_text :content
   has_many :hashtag_post_relations, dependent: :destroy
   has_many :hashtags, through: :hashtag_post_relations
-
+  
   after_create do
     post = Post.find_by(id: id)
     # hashbodyに打ち込まれたハッシュタグを検出
@@ -32,5 +33,12 @@ class Post < ApplicationRecord
       post.hashtags << tag
     end
   end
+
+    # アップロードされた画像のサイズをバリデーションする
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "５MBよりサイズを小さくしてください。")
+      end
+    end
 
 end

@@ -113,3 +113,5 @@ gem 'font-awesome-rails'
 
 gem 'sendgrid-ruby'
 gem 'gretel'
+gem 'mechanize'
+gem 'meta-tags'

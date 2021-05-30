@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_062815) do
+ActiveRecord::Schema.define(version: 2021_05_30_083328) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_062815) do
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "picture"
@@ -100,6 +100,10 @@ ActiveRecord::Schema.define(version: 2021_05_25_062815) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "category_id"
     t.string "hashbody"
+    t.text "url_title"
+    t.text "url_description"
+    t.text "url_image"
+    t.string "picture"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["step_id"], name: "index_posts_on_step_id"
   end

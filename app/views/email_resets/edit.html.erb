@@ -1,7 +1,7 @@
-<% provide(:title, 'Reset email') %>
+<% provide(:title, 'Eメールのリセット') %>
 
 <div class="container share-container">
-  <h1>Reset email</h1>
+  <h1>Eメールのリセット</h1>
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <%= form_with model: @user, url: email_reset_path(params[:id]), local: true do |f| %>

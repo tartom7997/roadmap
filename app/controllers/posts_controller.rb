@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
     before_action :logged_in_user, only: [:new, :create]
     before_action :correct_user,   only: [:edit, :update, :destroy]
-  
+
     def index
-      @all_post = Post.joins({:step => {:roadmap => :user}}).all.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+      @all_post = Post.includes({:step => {:roadmap => :user}}, :rich_text_content).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
       @posts = Post.paginate(page: params[:page], per_page: 5)
     end
 
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       @roadmap = Roadmap.find(params[:roadmap_id])
       @step = Step.find(params[:step_id])
       @post = @step.posts.build
-      @posts = @step.posts.paginate(page: params[:page], per_page: 5).order("created_at ASC")
+      @posts = @step.posts.includes(:rich_text_content).paginate(page: params[:page], per_page: 5).order("created_at ASC")
     end
 
     def show
@@ -20,6 +20,7 @@ class PostsController < ApplicationController
         @roadmap = Roadmap.find(params[:roadmap_id])
         @step = Step.find(params[:step_id])
         @post = Post.find(params[:id])
+        @post_sprit_content = ActionController::Base.helpers.strip_tags(@post.content.to_s).gsub(/[\n]/,"").strip.truncate(140)
     end
 
     def new
@@ -34,13 +35,16 @@ class PostsController < ApplicationController
       @roadmap  = Roadmap.find(params[:roadmap_id])
       @step = Step.find(params[:step_id])
       @post = @step.posts.build(post_params)
-        if @post.save
-            flash[:success] = "独学が記録されました！"
-            redirect_to all_user_roadmap_step_posts_path(@user, @roadmap, @step)
+      if @post.save
+          mechanize_title(@post)
+          mechanize_description(@post)
+          mechanize_image(@post)
+          flash[:success] = "独学が記録されました！"
+          redirect_to all_user_roadmap_step_posts_path(@user, @roadmap, @step)
         else
-            flash[:danger] = "独学の記録に失敗しました。すべての項目を入力してください。"
-            @posts = @step.posts.paginate(page: params[:page], per_page: 5).order("created_at ASC")
-            render 'all'
+          flash[:danger] = "独学の記録に失敗しました。すべての項目を入力してください。"
+          @posts = @step.posts.paginate(page: params[:page], per_page: 5).order("created_at ASC")
+          render 'all'
         end
     end
 
@@ -50,6 +54,9 @@ class PostsController < ApplicationController
     def update
         @post = Post.find(params[:id])
       if @post.update(post_params)
+        mechanize_title(@post)
+        mechanize_description(@post)
+        mechanize_image(@post)
         # 更新に成功した場合を扱う。
         flash[:success] = "独学の記録が更新されました。"
         redirect_to all_user_roadmap_step_posts_path(@user, @roadmap, @step)
@@ -72,20 +79,19 @@ class PostsController < ApplicationController
 
     def hashtag
       if params[:name].nil?
-        @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+        @hashtags = Hashtag.includes(:posts).to_a.group_by{ |hashtag| hashtag.posts.count}
       else
-        @hashtag = Hashtag.find_by(hashname: params[:name])
-        @post = @hashtag.posts.paginate(page: params[:page], per_page: 5).reverse_order
-        @hashtags_paginate = Hashtag.all.paginate(page: params[:page], per_page: 50)
-        @hashtags = @hashtags_paginate.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+        @hashtag = Hashtag.includes(:posts).find_by(hashname: params[:name])
+        @post = @hashtag.posts.includes({:step => {:roadmap => :user}}, :rich_text_content).paginate(page: params[:page], per_page: 5).reverse_order
+        @hashtags_paginate = Hashtag.includes(:posts).paginate(page: params[:page], per_page: 50)
+        @hashtags = @hashtags_paginate.to_a.group_by{ |hashtag| hashtag.posts.count}
       end
     end
-
 
     private
   
       def post_params
-        params.require(:post).permit(:title, :content, :url, :category_id, :hashbody, hashtag_ids: [])
+        params.require(:post).permit(:title, :content, :url, :category_id, :picture, :hashbody, hashtag_ids: [])
       end
 
       def correct_user
@@ -95,5 +101,50 @@ class PostsController < ApplicationController
         @post = @step.posts.find_by(id: params[:id])
         redirect_to root_url if @post.nil?
       end
+
+
+      def mechanize_title(post)
+        if post.url.present?
+          agent = Mechanize.new
+          page = agent.get(post.url)
+          if page.title.present?
+            title = page.title
+            post.update(url_title: title)
+          else
+            "no title"
+          end
+        end
+      end
+
+      def mechanize_description(post)
+        if post.url.present?
+          agent = Mechanize.new
+          page = agent.get(post.url)
+          if page.at("meta[property='og:description']").present?
+            description = page.at("meta[property='og:description']")[:content]
+            post.update(url_description: description)
+          else
+            "no description"
+          end
+        end
+      end
+
+      def mechanize_image(post)
+        if post.url.present?
+          agent = Mechanize.new
+          page = agent.get(post.url)
+          if page.at("meta[property='og:image']").present?
+            image = page.at("meta[property='og:image']")[:content]
+            post.update(url_image: image)
+          else
+            "no image"
+          end
+        end
+      end
+
+      # def content_copy(post)
+      #   strip_content = ActionController::Base.helpers.strip_tags(@post.content.to_s).gsub(/[\n]/,"").strip
+      #   post.update(content: strip_content)
+      # end
 
 end

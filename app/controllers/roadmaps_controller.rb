@@ -67,12 +67,12 @@ class RoadmapsController < ApplicationController
 
     def hashtag
       if params[:name].nil?
-        @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.roadmaps.count}
+        @hashtags = Hashtag.to_a.group_by{ |hashtag| hashtag.roadmaps.count}
       else
         @hashtag = Hashtag.find_by(hashname: params[:name])
         @roadmap = @hashtag.roadmaps.paginate(page: params[:page], per_page: 5).reverse_order
-        @hashtags_paginate = Hashtag.all.paginate(page: params[:page], per_page: 50)
-        @hashtags = @hashtags_paginate.all.to_a.group_by{ |hashtag| hashtag.roadmaps.count}
+        @hashtags_paginate = Hashtag.paginate(page: params[:page], per_page: 50)
+        @hashtags = @hashtags_paginate.to_a.group_by{ |hashtag| hashtag.roadmaps.count}
       end
     end
 

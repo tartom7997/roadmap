@@ -1,4 +1,7 @@
-<% provide(:title, 'ロードマップのステップ') %>
+<% set_meta_tags description: @roadmap.purpose,
+                og: { image: @roadmap.picture } %>
+
+<% provide(:title, @roadmap.title) %>
   <div class="container share-container">
   <% breadcrumb :steps_show  %>
   <%= breadcrumbs separator: " > " , class: :logo %>

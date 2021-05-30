@@ -1,0 +1,17 @@
+<% set_meta_tags description: @post_sprit_content,
+                og: { image: @post.picture } %>
+
+<% provide(:title, @post.title) %>
+
+  <div class="container share-container">
+    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+      <i class="mr-2 fas fa-road fa-2x"></i>
+      <div class="h1 mb-0 text-white lh-100">
+        独学の記録
+      </div>
+    </div>
+
+
+    <%= render 'shared/post_show' %>
+
+    </div>

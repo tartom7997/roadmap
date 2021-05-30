@@ -27,9 +27,24 @@
                 <%= f.text_field :hashbody, autocomplete: 'off', class: 'form-control mb-3 js-text_50', :placeholder => "#マーケティング #英語学習 etc... " %>
                 <P class="js-text-count_50 pull-right"></P>
 
+                <%= f.label :独学の記録のカバー, class: 'h2 mt-4' %>
+                <p>この独学の記録の表紙となるような画像があれば設定してみてください。著作権にはご注意ください。</p>
+                <span class="picture">
+                <%= f.file_field :picture %>
+                </span>
+
             <%= f.submit "作成する", class: 'form-control', class: "btn btn-primary mt-3" %>
           <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#micropost_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('最大のファイルサイズは5MBです。 より小さいサイズのファイルを選んでください。＊このままアップするとリサイズされます。');
+    }
+  });
+</script>
