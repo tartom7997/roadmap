@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
     before_action :logged_in_user, only: [:new, :create]
-    before_action :correct_user,   only: [:edit, :update, :destroy]
+    before_action :correct_admin_user,   only: [:edit, :update, :destroy]
   
     def index
       @user = User.find(params[:user_id])
@@ -66,11 +66,24 @@ class StepsController < ApplicationController
         params.require(:step).permit(:name, :content)
       end
 
+      # 210601_correct_admin_userに変更
       def correct_user
         @user = User.find(params[:user_id])
         @roadmap = Roadmap.find(params[:roadmap_id])
         @step = @roadmap.steps.find_by(id: params[:id])
         redirect_to root_url if @step.nil?
+      end
+
+      def correct_admin_user
+        @user = User.find(params[:user_id])
+        @roadmap = Roadmap.find(params[:roadmap_id])
+        @step = @roadmap.steps.find_by(id: params[:id])
+        if current_user == @user || current_user.admin
+          true
+        else
+          false
+          redirect_to(root_url)
+        end
       end
 
 end

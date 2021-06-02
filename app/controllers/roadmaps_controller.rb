@@ -1,7 +1,7 @@
 class RoadmapsController < ApplicationController
     skip_forgery_protection
     before_action :logged_in_user, only: [:new, :create]
-    before_action :correct_user,   only: [:edit, :update, :destroy]
+    before_action :correct_admin_user,   only: [:edit, :update, :destroy]
 
     def index
       @roadmaps = Roadmap.paginate(page: params[:page], per_page: 5)
@@ -86,9 +86,19 @@ class RoadmapsController < ApplicationController
         end
       end
 
+      # 210601_correct_admin_userに変更
       def correct_user
         @roadmap = current_user.roadmaps.find_by(id: params[:id])
         redirect_to root_url if @roadmap.nil?
+      end
+
+      def correct_admin_user
+        if @roadmap = current_user.roadmaps.find_by(id: params[:id]) || current_user.admin
+          true
+        else
+          false
+          redirect_to(root_url)
+        end
       end
 
 end

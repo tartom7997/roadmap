@@ -53,3 +53,6 @@ yarn-debug.log*
 /config/local_env.yml
 
 sendgrid.env
+
+# https://tech.basicinc.jp/articles/145
+/public/sitemap.xml.gz

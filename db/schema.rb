@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_30_083328) do
+ActiveRecord::Schema.define(version: 2021_06_01_075400) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 2021_05_30_083328) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone_number", null: false
+    t.string "subject", null: false
+    t.text "message", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "hashtag_post_relations", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "hashtag_id", null: false
@@ -89,6 +99,16 @@ ActiveRecord::Schema.define(version: 2021_05_30_083328) do
     t.string "picture"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.string "comment_content"
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["post_id"], name: "index_post_comments_on_post_id"
+    t.index ["user_id"], name: "index_post_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -170,6 +190,8 @@ ActiveRecord::Schema.define(version: 2021_05_30_083328) do
   add_foreign_key "hashtag_roadmap_relations", "hashtags"
   add_foreign_key "hashtag_roadmap_relations", "roadmaps"
   add_foreign_key "microposts", "users"
+  add_foreign_key "post_comments", "posts"
+  add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "steps"
   add_foreign_key "roadmaps", "users"

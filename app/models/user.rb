@@ -24,6 +24,7 @@ class User < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validate  :picture_size
   has_many :roadmaps, dependent: :destroy
+  has_many :post_comments
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)

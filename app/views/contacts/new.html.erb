@@ -1,0 +1,44 @@
+<% provide(:title, "お問い合わせ") %>
+  <div class="container share-container">
+    <div class="p-3 bg-white rounded shadow-sm">
+
+      <h1>Contact</h1>
+        <p>
+          サービスに関するお問い合わせは、運営の
+          <a href="https://twitter.com/Growthmap_ss">Twitter</a>のDMか、下記のフォームから、お気軽にご連絡ください。
+        </p>
+
+        <%= form_with model:@contact, url: confirm_path, local: true do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="form-group">
+            <%= f.label :name, 'お名前*' %>
+            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, 'Eメールアドレス*' %>
+            <%= f.text_field :email, autofocus: true, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :subject, 'タイトル*' %>
+            <%= f.text_field :subject, autofocus: true, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :message, 'メッセージ*' %>
+            <%= f.text_area :message, size: '10x10', class: 'form-control' %>
+          </div>
+
+          <div>
+            <%= f.submit '入力内容確認', class: 'btn btn-primary btn-block'  %>
+          </div>
+        <% end %>
+      
+        <small>
+          Blog: <a href="https://tartom7997.net/">UpDrafts</a>
+          Written by <a href="https://www.wantedly.com/id/tomtar9779">Itaru Tomita</a>
+        </small>
+
+    </div>
+  </div>

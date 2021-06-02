@@ -12,6 +12,7 @@ class Post < ApplicationRecord
   has_rich_text :content
   has_many :hashtag_post_relations, dependent: :destroy
   has_many :hashtags, through: :hashtag_post_relations
+  has_many :post_comments, dependent: :destroy
   
   after_create do
     post = Post.find_by(id: id)

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get  '/help',    to: 'static_pages#help'
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
+  get  '/term_of_use',    to: 'static_pages#term_of_use'
+  get  '/privacy_policy',    to: 'static_pages#privacy_policy'
+  get  '/specified_commercial_transaction_act',    to: 'static_pages#specified_commercial_transaction_act'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   get  '/signup_sns',  to: 'users#new_sns'
@@ -34,6 +37,9 @@ Rails.application.routes.draw do
   get '/roadmap/hashtag' => 'roadmaps#hashtag'
   get '/post/hashtag/:name' => 'posts#hashtag'
   get '/post/hashtag' => 'posts#hashtag'
+  post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
+  post 'contacts/back', to: 'contacts#back', as: 'back'
+  get 'done', to: 'contacts#done', as: 'done'
 
   resources :users do
     member do
@@ -55,6 +61,7 @@ Rails.application.routes.draw do
           collection do
             get   :all
           end
+          resources :post_comments, only: [:create, :destroy]
         end
       end
     end
@@ -68,4 +75,6 @@ Rails.application.routes.draw do
   resources :roadmaps,            only: [:index]
   resources :posts,               only: [:index]
   resources :categories,          except: [:new, :show]
+  resources :contacts,            only: [:new, :create]
+  
 end

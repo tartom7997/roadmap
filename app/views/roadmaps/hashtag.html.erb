@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col-md-12 my-3 text-right">
                                 更新日：<%= roadmap.updated_at.to_s(:datetime) %>
-                                    <% if current_user?(roadmap.user) %>
+                                    <% if current_user?(roadmap.user) || current_user.admin? %>
                                         <%= link_to "独学中に設定する", learnig_user_roadmap_path(roadmap.user, roadmap.id), method: :patch,
                                                                         data: { confirm: "こちらを独学中に設定しますか?" } %>
                                         <%= link_to "編集する", edit_user_roadmap_path(roadmap.user, roadmap.id), method: :get,
