@@ -61,6 +61,7 @@
         </div>
         <div class="col-md-12 my-3 text-right">
         更新日：<%= roadmap.updated_at.to_s(:datetime) %>
+        <% if logged_in? %>
             <% if current_user?(roadmap.user) || current_user.admin? %>
               <%= link_to "独学中に設定する", learnig_user_roadmap_path(@user, roadmap.id), method: :patch,
                                               data: { confirm: "こちらを独学中に設定しますか?" } %>
@@ -69,13 +70,50 @@
               <%= link_to "削除する", user_roadmap_path(@user, roadmap.id), method: :delete,
                                               data: { confirm: "本当に消しますか?" } %>
             <% end %>
+          <% end %>
         </div>
       </div>
         <% if current_user?(roadmap.user) %>
         <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
-          <%= link_to "このロードマップを学ぶ", user_roadmap_steps_path(@user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+          <%= link_to "コメントを見る", user_roadmap_path(@user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+        </div>
+        <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+          <%= link_to "ステップを記録する", user_roadmap_steps_path(@user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
         </div>
         <% end %>
+        
+        <div class="option mt-3">
+          <div class="option__like" id="like-link-<%= roadmap.id %>">
+            <% if logged_in? %>
+              <% if current_user.like_roadmaps.find_by(roadmap_id: roadmap.id) %>
+              <%= link_to unlike_user_roadmap_path(@user, roadmap.id, roadmap.id), method: :delete, remote: true, class: "option__like-on bg-info text-light" do %>
+                  <i class="fas fa-star"></i>
+                  <div class="option__like-on__text">いいね！</div>
+                  <div class="option__like-on__count">
+                    <%= roadmap.like_roadmaps.count %>
+                  </div>
+                <% end %>
+              <% else %>
+              <%= link_to unlike_user_roadmap_path(@user, roadmap.id, roadmap.id), method: :delete, remote: true, class: "option__like-on bg-info text-light" do %>
+                  <i class="fas fa-star"></i>
+                  <div class="option__like-off__text">いいね！</div>
+                  <div class="option__like-off__count">
+                    <%= roadmap.like_roadmaps.count %>
+                  </div>
+                  <% end %>
+              <% end %>
+            <% else %>
+              <div class="option__like-on bg-info text-light">
+                <i class="fas fa-star"></i>
+                <div class="option__like-off__text">いいね！</div>
+                <div class="option__like-off__count">
+                  <%= roadmap.like_roadmaps.count %>
+                </div>
+              </div>
+            <% end %>   
+          </div>
+        </div>
+
     </div>
   </li>
 <% else %> 
@@ -133,13 +171,49 @@
             </div>
           </div>
         </div>
+      </div>
         <div class="col-md-12 my-3 text-right">
           更新日：<%= roadmap.updated_at.to_s(:datetime) %>
         </div>
         <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
-          <%= link_to "ロードマップの詳細を見る", user_roadmap_steps_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+          <%= link_to "コメントを見る", user_roadmap_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
         </div>
-      </div>
+        <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+          <%= link_to "ステップの詳細を見る", user_roadmap_steps_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+        </div>
+
+        <div class="option mt-3">
+          <div class="option__like" id="like-link-<%= roadmap.id %>">
+            <% if logged_in? %>
+              <% if current_user.like_roadmaps.find_by(roadmap_id: roadmap.id) %>
+              <%= link_to unlike_user_roadmap_path(roadmap.user, roadmap.id, roadmap.id), method: :delete, remote: true, class: "option__like-on bg-info text-light" do %>
+                  <i class="fas fa-star"></i>
+                  <div class="option__like-on__text">いいね！</div>
+                  <div class="option__like-on__count">
+                    <%= roadmap.like_roadmaps.count %>
+                  </div>
+                <% end %>
+              <% else %>
+              <%= link_to unlike_user_roadmap_path(roadmap.user, roadmap.id, roadmap.id), method: :delete, remote: true, class: "option__like-on bg-info text-light" do %>
+                  <i class="fas fa-star"></i>
+                  <div class="option__like-off__text">いいね！</div>
+                  <div class="option__like-off__count">
+                    <%= roadmap.like_roadmaps.count %>
+                  </div>
+                  <% end %>
+              <% end %>
+            <% else %>
+              <div class="option__like-on bg-info text-light">
+                <i class="fas fa-star"></i>
+                <div class="option__like-off__text">いいね！</div>
+                <div class="option__like-off__count">
+                  <%= roadmap.like_roadmaps.count %>
+                </div>
+              </div>
+            <% end %>   
+          </div>
+        </div>
+
     </div>
   </li>
 <% end %>

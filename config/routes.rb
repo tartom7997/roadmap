@@ -42,6 +42,10 @@ Rails.application.routes.draw do
   get 'done', to: 'contacts#done', as: 'done'
 
   resources :users do
+    collection do
+      get :like_roadmaps
+      get :like_posts
+    end
     member do
       get :following, :followers
     end
@@ -55,15 +59,22 @@ Rails.application.routes.draw do
       end
       member do
         patch :learnig
+        post   '/like_roadmap/:roadmap_id' => 'like_roadmaps#like',   as: 'like'
+        delete '/like_roadmap/:roadmap_id' => 'like_roadmaps#unlike', as: 'unlike'
       end
       resources :steps do
         resources :posts do
           collection do
             get   :all
           end
+          member do
+            post   '/like_post/:post_id' => 'like_posts#like',   as: 'like'
+            delete '/like_post/:post_id' => 'like_posts#unlike', as: 'unlike'
+          end
           resources :post_comments, only: [:create, :destroy]
         end
       end
+      resources :roadmap_comments, only: [:create, :destroy]
     end
   end
 

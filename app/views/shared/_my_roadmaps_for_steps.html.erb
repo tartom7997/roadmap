@@ -59,14 +59,19 @@
         </div>
         <div class="col-md-12 my-3 text-right">
         更新日：<%= @roadmap.updated_at.to_s(:datetime) %>
+          <% if logged_in? %>
             <% if current_user?(@roadmap.user) || current_user.admin? %>
               <%= link_to "編集する", edit_user_roadmap_path(@user, @roadmap.id), method: :get,
               data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
               <%= link_to "削除する", user_roadmap_path(@user, @roadmap.id), method: :delete,
                                               data: { confirm: "本当に消しますか?" } %>
             <% end %>
+          <% end %>
         </div>
       </div>
     </div>
+      <div class="option">
+      <%= render partial: 'like_roadmaps/like_roadmap', locals: { roadmap: @roadmap } %>
+      </div>
   </div>
 </div>

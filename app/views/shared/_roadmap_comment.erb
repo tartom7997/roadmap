@@ -1,0 +1,30 @@
+<% if @roadmap_comments.present? %>
+  <% @roadmap_comments.each do |roadmap_comment| %>
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mb-3">
+            <%= link_to picture_for(roadmap_comment.user), roadmap_comment.user %>
+            <%= link_to roadmap_comment.user.name, roadmap_comment.user%>
+          </div>
+
+            <%= roadmap_comment.comment_content %> 
+
+            <div class="timestamp text-right">
+            作成日：<%= roadmap_comment.created_at.to_s(:datetime) %>
+            <% if logged_in? %>
+            <% if current_user?(roadmap_comment.user) || current_user.admin? %>
+              <%= link_to "削除する", user_roadmap_roadmap_comment_path(@user, @roadmap, roadmap_comment.id), method: :delete,
+              data: { confirm: "本当に消しますか?" } %>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="my-3 p-3 bg-white rounded shadow-sm text-center">
+    最初にコメントをしてみましょう！
+  </div>
+<% end %>

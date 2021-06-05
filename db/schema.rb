@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_075400) do
+ActiveRecord::Schema.define(version: 2021_06_03_041731) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -91,6 +91,20 @@ ActiveRecord::Schema.define(version: 2021_06_01_075400) do
     t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
   end
 
+  create_table "like_posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "like_roadmaps", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "roadmap_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "microposts", force: :cascade do |t|
     t.text "content"
     t.integer "user_id", null: false
@@ -124,6 +138,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_075400) do
     t.text "url_description"
     t.text "url_image"
     t.string "picture"
+    t.integer "likes_count"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["step_id"], name: "index_posts_on_step_id"
   end
@@ -138,6 +153,16 @@ ActiveRecord::Schema.define(version: 2021_06_01_075400) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "roadmap_comments", force: :cascade do |t|
+    t.string "comment_content"
+    t.integer "user_id", null: false
+    t.integer "roadmap_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["roadmap_id"], name: "index_roadmap_comments_on_roadmap_id"
+    t.index ["user_id"], name: "index_roadmap_comments_on_user_id"
+  end
+
   create_table "roadmaps", force: :cascade do |t|
     t.string "title"
     t.string "purpose"
@@ -147,6 +172,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_075400) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "picture"
     t.string "hashbody"
+    t.integer "likes_count"
     t.index ["user_id", "created_at"], name: "index_roadmaps_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_roadmaps_on_user_id"
   end
@@ -194,6 +220,8 @@ ActiveRecord::Schema.define(version: 2021_06_01_075400) do
   add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "steps"
+  add_foreign_key "roadmap_comments", "roadmaps"
+  add_foreign_key "roadmap_comments", "users"
   add_foreign_key "roadmaps", "users"
   add_foreign_key "steps", "roadmaps"
 end

@@ -67,12 +67,45 @@
       
       <div class="timestamp text-right">
         作成日：<%= post.created_at.to_s(:datetime) %>
+        <% if logged_in? %>
         <% if current_user?(post.step.roadmap.user) || current_user.admin? %>
           <%= link_to "編集する", edit_user_roadmap_step_post_path(post.id, step_id: post.step.id,roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id), method: :get,
           data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
           <%= link_to "削除する", user_roadmap_step_post_path(post.id, step_id: post.step.id,roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id), method: :delete,
           data: { confirm: "本当に消しますか?" } %>
         <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="option mt-3">
+      <div class="option__like" id="like-link-<%= post.id %>">
+        <% if logged_in? %>
+          <% if current_user.like_posts.find_by(post_id: post.id) %>
+            <%= link_to unlike_user_roadmap_step_post_path(post.id, post.id, step_id: post.step.id,roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id), method: :delete, remote: true, class: "option__like-on bg-info text-light" do %>
+              <i class="fas fa-star"></i>
+              <div class="option__like-on__text">いいね！</div>
+              <div class="option__like-on__count">
+                <%= post.like_posts.count %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= link_to like_user_roadmap_step_post_path(post.id, post.id, step_id: post.step.id,roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id), method: :post, remote: true, class: "option__like-on bg-info text-light" do %>
+              <i class="fas fa-star"></i>
+              <div class="option__like-off__text">いいね！</div>
+              <div class="option__like-off__count">
+                <%= post.like_posts.count %>
+              </div>
+              <% end %>
+          <% end %>
+        <% else %>
+          <div class="option__like-on bg-info text-light">
+            <i class="fas fa-star"></i>
+            <div class="option__like-off__text">いいね！</div>
+            <div class="option__like-off__count">
+              <%= post.like_posts.count %>
+            </div>
+          </div>
+        <% end %>   
       </div>
     </div>
   </div>

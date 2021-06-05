@@ -1,29 +1,51 @@
-<% provide(:title, 'あなたのロードマップ') %>
+<% set_meta_tags description: @roadmap.purpose,
+                og: { image: @roadmap.picture } %>
+
+
+
+<% provide(:title, @roadmap.title) %>
   <div class="container share-container">
+ 
+  <%= render 'shared/sns' %>
+ 
+  <% breadcrumb :roadmaps_show  %>
+  <%= breadcrumbs separator: " > " , class: :logo %>
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
       <i class="mr-2 fas fa-road fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">
-        <% if current_user?(@user) %>
-          ロードマップ (<%= @user.roadmaps.count %>)
-        <% else %>
-          ロードマップ (<%= @user.roadmaps.count %>)
-        <% end %>
+          ロードマップの詳細
       </div>
     </div>
-      <% if current_user?(@user) %>
-        <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
-          <%= link_to "新しいロードマップを作る", new_user_roadmap_path, class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
-        </div>
-      <% end %>
-      <% if @user.roadmaps.any? %>
-        <div class="row">
-          <div class="col-md-12">
-              <%= will_paginate @roadmaps %>
-            <ol class="microposts">
-              <%= render @roadmaps %>
-            </ol>
-              <%= will_paginate @roadmaps %>
-          </div>
-        </div>
-      <% end %>
+
+    <%= render 'shared/my_roadmaps_for_steps' %>
+
+  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+    <i class="mr-2 fas fa-comments fa-2x"></i>
+    <div class="h1 mb-0 text-white lh-100">
+      コメントリスト
+    </div>
+  </div>
+
+  <%= will_paginate @roadmap_comments %>
+
+  <%= render 'shared/roadmap_comment' %>
+
+  <%= will_paginate @roadmap_comments %>
+
+  <% if logged_in? %>
+
+    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+      <i class="mr-2 fas fa-comments fa-2x"></i>
+      <div class="h1 mb-0 text-white lh-100">
+        コメントを投稿する
+      </div>
+    </div>
+
+
+    <%= render 'shared/roadmap_comment_form' %>
+
+  <% end %>
+
+  <%= render 'shared/sns' %>
+
   </div>

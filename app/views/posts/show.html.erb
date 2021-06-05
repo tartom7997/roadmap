@@ -4,10 +4,16 @@
 <% provide(:title, @post.title) %>
 
   <div class="container share-container">
+
+  <%= render 'shared/sns' %>
+  
+  <% breadcrumb :posts_show  %>
+  <%= breadcrumbs separator: " > " , class: :logo %>
+
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
       <i class="mr-2 fas fa-pen-alt fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">
-        独学の記録
+        独学の詳細
       </div>
     </div>
 
@@ -20,15 +26,26 @@
       </div>
     </div>
 
+    <%= will_paginate @post_comments %>
+
     <%= render 'shared/post_comment' %>
 
-    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
-      <i class="mr-2 fas fa-comments fa-2x"></i>
-      <div class="h1 mb-0 text-white lh-100">
-        コメントを投稿する
-      </div>
-    </div>
+    <%= will_paginate @post_comments %>
 
-    <%= render 'shared/post_comment_form' %>
+    <% if logged_in? %>
+
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+        <i class="mr-2 fas fa-comments fa-2x"></i>
+        <div class="h1 mb-0 text-white lh-100">
+          コメントを投稿する
+        </div>
+      </div>
+
+
+      <%= render 'shared/post_comment_form' %>
+
+    <% end %>
+
+    <%= render 'shared/sns' %>
 
   </div>

@@ -7,6 +7,11 @@ crumb :roadmaps_all do
   parent :root
 end
 
+crumb :roadmaps_show do
+  link "ロードマップの詳細", user_roadmap_path
+  parent :roadmaps_all
+end
+
 crumb :steps_show do
   link "ステップ", user_roadmap_steps_path
   parent :roadmaps_all
@@ -15,6 +20,11 @@ end
 crumb :posts_all do
   link "独学の記録", all_user_roadmap_step_posts_path
   parent :steps_show
+end
+
+crumb :posts_show do
+  link "独学の詳細", user_roadmap_step_post_path
+  parent :posts_all
 end
 
 # crumb :projects do

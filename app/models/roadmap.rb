@@ -11,6 +11,9 @@ class Roadmap < ApplicationRecord
     has_many :steps, dependent: :destroy
     has_many :hashtag_roadmap_relations, dependent: :destroy
     has_many :hashtags, through: :hashtag_roadmap_relations
+    has_many :roadmap_comments, dependent: :destroy
+    has_many :like_roadmaps, dependent: :destroy
+    has_many :liking_users, through: :like_roadmaps, source: :user
 
     after_create do
       roadmap = Roadmap.find_by(id: id)

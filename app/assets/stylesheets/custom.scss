@@ -661,3 +661,44 @@ span.picture {
 }
 
 /* Post */
+
+
+/* Like */
+
+.option {
+  display: flex;
+  justify-content: center;
+  &__like {
+    &-on {
+      text-decoration: none;
+      padding: 11px 10px;
+      border-radius: 40px;
+      color: #3CCACE;
+      border: 1px solid;
+      display: flex;
+      line-height: 16px;
+      .fas.fa-star {
+        padding-right: 5px;
+      }
+      &__text {
+        padding-right: 5px;
+      }
+    }
+    &-off {
+      text-decoration: none;
+      padding: 11px 10px;
+      border-radius: 40px;
+      color: #333;
+      border: 1px solid #f5f5f5;
+      display: flex;
+      line-height: 16px;
+      background: #f5f5f5;
+      .fas.fa-star {
+        padding-right: 5px;
+      }
+      &__text {
+        padding-right: 5px;
+      }
+    }
+  }
+}

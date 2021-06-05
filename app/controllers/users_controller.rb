@@ -104,6 +104,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def like_roadmaps
+    @like_roadmap  = current_user.like_roadmaps.includes(:user).paginate(page: params[:page], per_page: 10)
+  end
+
+  def like_posts
+    @like_post = current_user.like_posts.includes(:post => {:step => {:roadmap => :user}}).paginate(page: params[:page], per_page: 10)
+  end
+
   private
 
     def user_params

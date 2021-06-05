@@ -14,8 +14,9 @@ class RoadmapsController < ApplicationController
 
     def show
       @user = User.find(params[:user_id])
-      @roadmaps = @user.roadmaps.paginate(page: params[:page], per_page: 5).order("updated_at DESC")
       @roadmap = Roadmap.find(params[:id])
+      @roadmap_comments = @roadmap.roadmap_comments.paginate(page: params[:page], per_page: 10).order("created_at ASC")
+      @roadmap_comment = current_user.roadmap_comments.build if logged_in?
     end
 
     def new

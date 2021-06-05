@@ -74,6 +74,7 @@
                                 </div>
                                 <div class="col-md-12 my-3 text-right">
                                 更新日：<%= roadmap.updated_at.to_s(:datetime) %>
+                                <% if logged_in? %>
                                     <% if current_user?(roadmap.user) || current_user.admin? %>
                                         <%= link_to "独学中に設定する", learnig_user_roadmap_path(roadmap.user, roadmap.id), method: :patch,
                                                                         data: { confirm: "こちらを独学中に設定しますか?" } %>
@@ -82,11 +83,15 @@
                                         <%= link_to "削除する", user_roadmap_path(roadmap.user, roadmap.id), method: :delete,
                                                                         data: { confirm: "本当に消しますか?" } %>
                                     <% end %>
+                                <% end %>    
                                 </div>
                                 </div>
                                 <% if current_user?(roadmap.user) %>
                                 <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
-                                    <%= link_to "このロードマップを学ぶ", user_roadmap_steps_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+                                    <%= link_to "コメントを見る", user_roadmap_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+                                </div>
+                                <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+                                    <%= link_to "ステップを記録する", user_roadmap_steps_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
                                 </div>
                                 <% end %>
                             </div>

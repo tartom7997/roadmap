@@ -1,0 +1,12 @@
+<div class="text-right">
+
+<a href="https://www.facebook.com/share.php?u=<%= request.url %>" rel="nofollow" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+
+<%= link_to "https://twitter.com/share?url=#{ request.url }&text=#{ yield :title }", class: 'btn btn-default p-0 m-0', target: '_blank' do %>
+  <i class="pb-3 fab fa-twitter fa-2x", style='color: #3399FF;'></i>
+<% end %>
+
+<div class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="<%= request.url %>" data-color="default" data-size="small" data-count="false" style="display: none;"></div>
+ <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
+</div>

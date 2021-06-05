@@ -1,0 +1,17 @@
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="row">
+      <div class="col-md-12">
+        <%= form_with model:[@user, @roadmap, @roadmap_comment], local: true do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            
+
+            <%= f.text_area :comment_content, placeholder: "この独学にアドバイスをしたり、称賛したり、質問したり、独学の知識を交換しましょう！", class: 'js-text' %>
+            <P class="js-text-count pull-right"></P>
+
+            <%= f.hidden_field :roadmap_id, value: @roadmap.id %>
+
+            <%= f.submit "投稿する", class: 'form-control', class: "btn btn-primary mt-1" %>
+          <% end %>
+      </div>
+    </div>
+  </div>

@@ -1,8 +1,13 @@
 <% set_meta_tags description: @roadmap.purpose,
                 og: { image: @roadmap.picture } %>
 
+
+
 <% provide(:title, @roadmap.title) %>
   <div class="container share-container">
+ 
+  <%= render 'shared/sns' %>
+ 
   <% breadcrumb :steps_show  %>
   <%= breadcrumbs separator: " > " , class: :logo %>
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
@@ -40,4 +45,7 @@
           </div>
         </div>
       <% end %>
+
+      <%= render 'shared/sns' %>
+
   </div>

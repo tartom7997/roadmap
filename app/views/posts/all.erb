@@ -3,8 +3,12 @@
 
 <% provide(:title, @step.name) %>
   <div class="container share-container">
+  
+  <%= render 'shared/sns' %>
+
   <% breadcrumb :posts_all  %>
   <%= breadcrumbs separator: " > " , class: :logo %>
+        
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
       <i class="mr-2 fas fa-shoe-prints fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">
@@ -15,6 +19,8 @@
         <% end %>
       </div>
     </div>
+
+
 
     <%= render 'shared/my_steps_for_posts' %>
 
@@ -40,4 +46,7 @@
           </div>
         </div>
       <% end %>
+
+      <%= render 'shared/sns' %>
+
   </div>

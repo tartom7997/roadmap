@@ -59,12 +59,17 @@
 
     <div class="timestamp text-right">
       作成日：<%= @post.created_at.to_s(:datetime) %>
+      <% if logged_in? %>
       <% if current_user?(@user) || current_user.admin? %>
         <%= link_to "編集する", edit_user_roadmap_step_post_path(@user, @roadmap, @step, @post), method: :get,
         data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
         <%= link_to "削除する", user_roadmap_step_post_path(@user, @roadmap, @step, @post), method: :delete,
         data: { confirm: "本当に消しますか?" } %>
       <% end %>
+      <% end %>
+      
     </div>
-
+    <div class="option mt-3">
+      <%= render partial: 'like_posts/like_post', locals: { post: @post } %>
+    </div>
 </div>

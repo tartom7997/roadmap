@@ -10,9 +10,10 @@
     </section>
       <ul class="channel_list">
         <%= sidebar_link_item('ホーム', root_path) %>
-        <%= sidebar_link_item('おすすめ', roadmaps_path) %>
         <%= sidebar_link_item('マイロードマップ', all_user_roadmaps_url(user_id: current_user)) %>
-        <%= sidebar_link_item('コミュニティ', users_path) %>
+        <%= sidebar_link_item('いいねしたロードマップ', like_roadmaps_users_path) %>
+        <%= sidebar_link_item('いいねした独学の記録', like_posts_users_path) %>
+        コミュニティ
       </ul>
   </div>
 </div>
