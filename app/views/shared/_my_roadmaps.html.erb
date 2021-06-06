@@ -87,6 +87,7 @@
     <% end %>
 
     <div class="option">
+      <% if @roadmap_first.present? %>
           <div class="option__like-on bg-info text-light">
             <i class="fas fa-star"></i>
             <div class="bg-info">いいね！</div>
@@ -94,6 +95,7 @@
               <%= @roadmap_first.like_roadmaps.count %>
             </div>
           </div>
+      <% end %>   
     </div>
 
   </div>

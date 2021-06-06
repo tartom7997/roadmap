@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "https://growthmap-ss.herokuapp.com/"
+SitemapGenerator::Sitemap.default_host = "https://growthmap-ss.com/"
 
 SitemapGenerator::Sitemap.create do
   add root_path
