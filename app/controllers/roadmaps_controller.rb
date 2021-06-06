@@ -2,6 +2,7 @@ class RoadmapsController < ApplicationController
     skip_forgery_protection
     before_action :logged_in_user, only: [:new, :create]
     before_action :correct_admin_user,   only: [:edit, :update, :destroy]
+    impressionist :actions=> [:show]
 
     def index
       @roadmaps = Roadmap.paginate(page: params[:page], per_page: 5)
@@ -17,6 +18,7 @@ class RoadmapsController < ApplicationController
       @roadmap = Roadmap.find(params[:id])
       @roadmap_comments = @roadmap.roadmap_comments.paginate(page: params[:page], per_page: 10).order("created_at ASC")
       @roadmap_comment = current_user.roadmap_comments.build if logged_in?
+      impressionist(@roadmap, nil, unique: [:session_hash])
     end
 
     def new

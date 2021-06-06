@@ -5,47 +5,54 @@
 
 <% provide(:title, @roadmap.title) %>
   <div class="container share-container">
- 
-  <%= render 'shared/sns' %>
- 
-  <% breadcrumb :roadmaps_show  %>
-  <%= breadcrumbs separator: " > " , class: :logo %>
-    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
-      <i class="mr-2 fas fa-road fa-2x"></i>
-      <div class="h1 mb-0 text-white lh-100">
-          ロードマップの詳細
+  
+    <%= render 'shared/sns' %>
+  
+    <% breadcrumb :roadmaps_show  %>
+    <%= breadcrumbs separator: " > " , class: :logo %>
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+        <i class="mr-2 fas fa-road fa-2x"></i>
+        <div class="h1 mb-0 text-white lh-100">
+            ロードマップの詳細
+        </div>
       </div>
-    </div>
 
-    <%= render 'shared/my_roadmaps_for_steps' %>
-
-  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
-    <i class="mr-2 fas fa-comments fa-2x"></i>
-    <div class="h1 mb-0 text-white lh-100">
-      コメントリスト
-    </div>
-  </div>
-
-  <%= will_paginate @roadmap_comments %>
-
-  <%= render 'shared/roadmap_comment' %>
-
-  <%= will_paginate @roadmap_comments %>
-
-  <% if logged_in? %>
+      <%= render 'shared/my_roadmaps_for_steps' %>
 
     <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
       <i class="mr-2 fas fa-comments fa-2x"></i>
       <div class="h1 mb-0 text-white lh-100">
-        コメントを投稿する
+        コメントリスト
       </div>
     </div>
 
+    <%= will_paginate @roadmap_comments %>
 
-    <%= render 'shared/roadmap_comment_form' %>
+    <%= render 'shared/roadmap_comment' %>
 
-  <% end %>
+    <%= will_paginate @roadmap_comments %>
 
-  <%= render 'shared/sns' %>
+    <% if logged_in? %>
 
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded shadow-sm">
+        <i class="mr-2 fas fa-comments fa-2x"></i>
+        <div class="h1 mb-0 text-white lh-100">
+          コメントを投稿する
+        </div>
+      </div>
+
+
+      <%= render 'shared/roadmap_comment_form' %>
+
+    <% end %>
+
+    <%= render 'shared/sns' %>
+
+    <div class="option">
+    <div class="option__like-on bg-info text-light">
+      <i class="fas fa-signal"></i>
+      　PV数：<%=  @roadmap.impressionist_count %>
+    </div>
   </div>
+
+   </div>

@@ -1,12 +1,14 @@
 class StepsController < ApplicationController
     before_action :logged_in_user, only: [:new, :create]
     before_action :correct_admin_user,   only: [:edit, :update, :destroy]
+    impressionist :actions=> [:index]
   
     def index
       @user = User.find(params[:user_id])
       @roadmap = Roadmap.find(params[:roadmap_id])
       @steps = @roadmap.steps.paginate(page: params[:page], per_page: 5).order("created_at ASC")
       @step = @roadmap.steps.build
+      impressionist(@roadmap, nil, unique: [:session_hash])
     end
 
     def show

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     before_action :logged_in_user, only: [:new, :create]
     before_action :correct_admin_user,   only: [:edit, :update, :destroy]
+    impressionist :actions=> [:all, :show]
 
     def index
       @all_post = Post.includes({:step => {:roadmap => :user}}, :rich_text_content).order(created_at: :desc).paginate(page: params[:page], per_page: 10)
@@ -13,6 +14,7 @@ class PostsController < ApplicationController
       @step = Step.find(params[:step_id])
       @post = @step.posts.build
       @posts = @step.posts.includes(:rich_text_content).paginate(page: params[:page], per_page: 10).order("created_at ASC")
+      impressionist(@step, nil, unique: [:session_hash])
     end
 
     def show
@@ -23,6 +25,7 @@ class PostsController < ApplicationController
         @post_sprit_content = ActionController::Base.helpers.strip_tags(@post.content.to_s).gsub(/[\n]/,"").strip.truncate(140)
         @post_comments = @post.post_comments.paginate(page: params[:page], per_page: 10).order("created_at ASC")
         @post_comment = current_user.post_comments.build if logged_in?
+        impressionist(@post, nil, unique: [:session_hash])
     end
 
     def new

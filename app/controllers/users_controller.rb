@@ -3,6 +3,7 @@ class UsersController < ApplicationController
                                         :following, :followers]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
+  impressionist :actions=> [:show]
 
   def index
     # @users = User.all
@@ -22,6 +23,7 @@ class UsersController < ApplicationController
     # @profile = User.profile
     # @videos = User.videos.order("created_at DESC")
     @my_post = @user.feed_my_post.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    impressionist(@user, nil, unique: [:session_hash])
   end
 
   def new
