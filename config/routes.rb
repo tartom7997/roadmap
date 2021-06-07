@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get  '/term_of_use',    to: 'static_pages#term_of_use'
   get  '/privacy_policy',    to: 'static_pages#privacy_policy'
   get  '/specified_commercial_transaction_act',    to: 'static_pages#specified_commercial_transaction_act'
+  get  '/error', to: 'static_pages#error'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   get  '/signup_sns',  to: 'users#new_sns'

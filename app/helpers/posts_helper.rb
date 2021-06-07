@@ -23,7 +23,7 @@ module PostsHelper
       def mechanize_title(post)
         if post.url.present?
           agent = Mechanize.new
-          page = agent.get(post.url)
+          page = agent.get(post.url) rescue agent.get(error_url)
           if page.title.present?
             title = page.title
             post.update(url_title: title)
@@ -36,7 +36,7 @@ module PostsHelper
       def mechanize_description(post)
         if post.url.present?
           agent = Mechanize.new
-          page = agent.get(post.url)
+          page = agent.get(post.url) rescue agent.get(error_url)
           if page.at("meta[property='og:description']").present?
             description = page.at("meta[property='og:description']")[:content]
             post.update(url_description: description)
@@ -49,7 +49,7 @@ module PostsHelper
       def mechanize_image(post)
         if post.url.present?
           agent = Mechanize.new
-          page = agent.get(post.url)
+          page = agent.get(post.url) rescue agent.get(error_url)
           if page.at("meta[property='og:image']").present?
             image = page.at("meta[property='og:image']")[:content]
             post.update(url_image: image)

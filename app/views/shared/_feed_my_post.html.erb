@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-9">
                       <p><%= post.url_title if post.url_title.present? %></p>
-                      <p><%= post.url_description.truncate(140)  if post.url_title.present? %></p>
+                      <p><%= post.url_description.truncate(140)  if post.url_description.present? %></p>
                       <p><%= link_to post.url, post.url %></p>
                     </div>
                   </div>
