@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   patch '/users/:user_id/roadmaps/:roadmap_id/steps/:step_id/posts/:id/edit', to: 'posts#update'
   get '/roadmap/hashtag/:name' => 'roadmaps#hashtag'
   get '/roadmap/hashtag' => 'roadmaps#hashtag'
+  delete '/roadmap/hashtag/delete',  to: 'roadmaps#hashtag_destroy'
   get '/post/hashtag/:name' => 'posts#hashtag'
   get '/post/hashtag' => 'posts#hashtag'
   post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'

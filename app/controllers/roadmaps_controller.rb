@@ -79,6 +79,17 @@ class RoadmapsController < ApplicationController
       end
     end
 
+    def hashtag_destroy
+      @hashtag = Hashtag.find(params[:id])
+      if @hashtag.destroy
+        flash[:success] = "ハッシュタグが削除されました。"
+        redirect_to all_user_roadmaps_url(user_id: current_user)
+      else
+        flash[:error] = "ハッシュタグが削除されませんでした。"
+        render 'show'
+      end
+    end
+
     private
   
       def roadmap_params

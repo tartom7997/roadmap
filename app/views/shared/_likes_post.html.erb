@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-9">
                       <p><%= like_post.post.url_title if like_post.post.url_title.present? %></p>
-                      <p><%= like_post.post.url_description.truncate(140)  if like_post.post.url_title.present? %></p>
+                      <p><%= like_post.post.url_description.truncate(140)  if like_post.post.url_description.present? %></p>
                       <p><%= link_to like_post.post.url, like_post.post.url %></p>
                     </div>
                   </div>
