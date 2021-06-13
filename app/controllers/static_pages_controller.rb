@@ -11,9 +11,6 @@ class StaticPagesController < ApplicationController
       # @feed_post_items = current_user.feed_post.paginate(page: params[:page]).order(created_at: :desc)
     end
   end
-  
-  def help
-  end
 
   def about
   end
@@ -22,6 +19,9 @@ class StaticPagesController < ApplicationController
   end
 
   def error
+  end
+    
+  def mail_send
   end
 
 end

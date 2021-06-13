@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'categories/edit'
   get 'sessions/new'
   root 'static_pages#home'
-  get  '/help',    to: 'static_pages#help'
+  get  '/mail_send',    to: 'static_pages#mail_send'
   get  '/about',   to: 'static_pages#about'
   get  '/contact', to: 'static_pages#contact'
   get  '/term_of_use',    to: 'static_pages#term_of_use'

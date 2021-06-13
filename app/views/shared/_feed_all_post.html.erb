@@ -44,9 +44,8 @@
                       <%= image_tag post.url_image, class: "img-fluid" if post.url_image.present? %>
                     </div>
                     <div class="col-md-9">
-                      <p><%= post.url_title if post.url_title.present? %></p>
-                      <p><%= post.url_description.truncate(140)  if post.url_description.present? %></p>
-                      <p><%= link_to post.url, post.url %></p>
+                      <p><%= link_to post.url_title, post.url if post.url_title.present? %></p>
+                      <p><%= post.url_description.truncate(50) if post.url_description.present? %></p>
                     </div>
                   </div>
                 </div>

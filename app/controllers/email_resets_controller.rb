@@ -48,7 +48,7 @@ class EmailResetsController < ApplicationController
       @user.create_reset_digest
       @user.send_email_reset_email
       flash[:info] = "Eメールアドレスの再設定のためのEメールが送られました。"
-      redirect_to root_url
+      redirect_to mail_send_url
     else
       flash.now[:danger] = "Eメールアドレスが見つかりませんでした。"
       render 'new'
