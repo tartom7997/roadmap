@@ -15,6 +15,7 @@ SitemapGenerator::Sitemap.create do
     roadmaps = Roadmap.includes(:user)
     roadmaps.each do |roadmap|
       add all_user_roadmaps_path(user_id: roadmap.user.id), changefreq: 'daily', :lastmod => roadmap.updated_at
+      add user_roadmap_path(roadmap.id, user_id: roadmap.user.id), changefreq: 'daily', :lastmod => roadmap.updated_at
     end
 
     steps = Step.includes(:roadmap => :user)
@@ -25,10 +26,6 @@ SitemapGenerator::Sitemap.create do
     posts = Post.includes({:step => {:roadmap => :user}})
     posts.each do |post|
       add all_user_roadmap_step_posts_path(step_id: post.step.id, roadmap_id: post.step.roadmap.id, user_id: post.step.roadmap.user.id), changefreq: 'daily', :lastmod => post.updated_at
-    end
-
-    posts = Post.includes({:step => {:roadmap => :user}})
-    posts.each do |post|
       add user_roadmap_step_post_path(post.id, step_id: post.step.id,roadmap_id:post.step.roadmap.id,user_id:post.step.roadmap.user.id), changefreq: 'daily', :lastmod => post.updated_at
     end
 
