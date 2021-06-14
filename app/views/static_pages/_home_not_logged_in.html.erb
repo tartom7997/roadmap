@@ -10,9 +10,21 @@
     </div>
   </div>
 
+<div class="container-fluid">
+  <div class="row col-md-12 justify-content-center ">
+    <div class="col-md-4 img-hidden container-top-end">
+    </div>
+    <div class="col-md-4 box-top-discription">
+      <p>
+        Growthmapは、「独学を集合知に」するために、独学のロードマップを記録し、記録を通じて継続と他者への学びのシェアを行い合うサイトです。独学を支え合いましょう。
+      </p>
+    </div>
+  </div>
+</div>
+
 <div class="background-top-medium">
   <div class="box-top-discription">
-    <h2>独学で、困ること。</h1>
+    <h2>独学で、困ること。</h2>
       <p>読むべき「本・教材」</p>
       <p>見るべき「ブログ・ノウハウ」</p>
       <p>聞くべき「音声」</p>
@@ -28,21 +40,27 @@
     </div>
 </div>
 
-<div class="background-top-bottom">
-  <div class="box-top-discription">
-    <h2>継続しましょう。</h2>
-      <p>独学の成功には、継続が必要です。継続のために、まずは学習を記録し、習慣化しましょう。</p>
-      <br>
-    <h2>共有しましょう。</h2>
-      <p>あなたの独学の記録が継続に繋がり、継続的な記録が共有されることで、結果的に誰かの独学の土台になります。</p>
-      <br>
-    <h2>参考にしましょう。</h2>
-      <p>独学の成功には、参考が必要です。継続のために、先人の記録から情報を参照し、自分に合った情報を取得しましょう。</p>
-      <br>
-    <h2>称賛しましょう。</h2>
-      <p>そして、記録してくれた先人の独学者を適切にたたえることが、次の独学者の指標の蓄積に繋がります。</p>
-      <br>
-      <p>あなたの独学を、誰かの独学のために、独学の集合知のループを作りましょう。</p>
+<div class="row col-md-12">
+  <div class="col-md-4 box-top-discription text-center"">
+  <%= image_tag "top_value_01.png", alt: "growthmap_value_01_learn", class: "img-fluid mb-3", :size => '130x130' %>
+    <p>
+      独学の成功には、継続が必要です。継続のために、まずは学習を記録し、習慣化しましょう。継続的な記録が共有されることで、誰かの独学の土台になります。
+    </p>
+  </div>
+  <div class="col-md-4 box-top-discription text-center"">
+  <%= image_tag "top_value_02.png", alt: "growthmap_value_01_roadmap", class: "img-fluid mb-3", :size => '130x130' %>
+    <p>
+      独学の成功には、参考が必要です。継続のために、先人の記録から情報を参照し、自分に合った情報を取得しましょう。
+    </p>
+  </div>
+  <div class="col-md-4 box-top-discription text-center">
+    <%= image_tag "top_value_03.png", alt: "growthmap_value_01_communication", class: "img-fluid mb-3", :size => '130x130' %>
+    <p>
+    そして、記録してくれた先人の独学者を適切にたたえることが、次の独学者の指標の蓄積に繋がります。独学者同士で交流をしましょう。
+    </p>
+  </div>
+  <div class="row col-md-12 justify-content-center m-2 mb-5 ">
+    <%= link_to "独学のロードマップを見る", roadmaps_path, class: "btn btn-lg btn-primary" %>
   </div>
 </div>
 
