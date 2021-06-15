@@ -1,5 +1,5 @@
 <% set_meta_tags description: @post_sprit_content,
-                og: { image: @post.picture } %>
+                og: { image:  image_url(@post.picture) } %>
 
 <% provide(:title, @post.title) %>
 
