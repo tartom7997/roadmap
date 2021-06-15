@@ -1,5 +1,6 @@
-<% set_meta_tags description: @post_sprit_content,
-                og: { image: @post.picture } %>
+<% set_meta_tags description: @post_sprit_content.to_s.gsub(/\r\n|\r|\n|\s|\t/, ""),
+                og: { image: image_url(url_for(@post.picture)) }
+                twitter: { image: image_url(url_for(@post.picture)) } %>
 
 <% provide(:title, @post.title) %>
 
