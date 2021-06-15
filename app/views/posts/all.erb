@@ -1,6 +1,5 @@
-<% set_meta_tags description: @step.content.to_s.gsub(/\r\n|\r|\n|\s|\t/, ""),
-                og: { image: image_url(url_for(@roadmap.picture)) }
-                twitter: { image: image_url(url_for(@roadmap.picture)) } %>
+<% set_meta_tags description: @step.content,
+                og: { image: @roadmap.picture } %>
 
 <% provide(:title, @step.name) %>
   <div class="container share-container">
