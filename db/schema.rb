@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_232705) do
+ActiveRecord::Schema.define(version: 2021_06_20_132935) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_232705) do
     t.text "url_image"
     t.string "picture"
     t.integer "likes_count"
+    t.integer "impressions_count", default: 0
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["step_id"], name: "index_posts_on_step_id"
   end
@@ -199,6 +200,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_232705) do
     t.string "picture"
     t.string "hashbody"
     t.integer "likes_count"
+    t.integer "impressions_count", default: 0
     t.index ["user_id", "created_at"], name: "index_roadmaps_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_roadmaps_on_user_id"
   end
@@ -209,6 +211,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_232705) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "content"
+    t.integer "impressions_count", default: 0
     t.index ["roadmap_id"], name: "index_steps_on_roadmap_id"
   end
 
@@ -232,6 +235,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_232705) do
     t.string "gender"
     t.date "birthday"
     t.string "email_reset_before"
+    t.integer "impressions_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

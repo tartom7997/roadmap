@@ -30,7 +30,7 @@ class User < ApplicationRecord
   has_many :liked_roadmaps, through: :like_roadmaps, source: :roadmap
   has_many :like_posts, dependent: :destroy
   has_many :liked_posts, through: :like_posts, source: :post
-  is_impressionable
+  is_impressionable counter_cache: true
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)

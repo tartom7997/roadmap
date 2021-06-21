@@ -14,7 +14,7 @@ class Roadmap < ApplicationRecord
     has_many :roadmap_comments, dependent: :destroy
     has_many :like_roadmaps, dependent: :destroy
     has_many :liking_users, through: :like_roadmaps, source: :user
-    is_impressionable
+    is_impressionable counter_cache: true
 
     after_create do
       roadmap = Roadmap.find_by(id: id)

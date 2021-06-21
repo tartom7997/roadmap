@@ -5,5 +5,5 @@ class Step < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :content, presence: true, length: { maximum: 250 }
   has_many :posts, dependent: :destroy
-  is_impressionable
+  is_impressionable counter_cache: true
 end

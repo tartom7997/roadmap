@@ -15,7 +15,7 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :like_posts, dependent: :destroy
   has_many :liking_users, through: :like_posts, source: :user
-  is_impressionable
+  is_impressionable counter_cache: true
   
   after_create do
     post = Post.find_by(id: id)
