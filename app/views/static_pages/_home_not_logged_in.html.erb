@@ -49,6 +49,104 @@
   </div>
 </div>
 
+<div class="container share-container">
+<div class="row col-md-12">
+ 
+<% @roadmaps.each do |roadmap| %>
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <div class="row">
+      <div class="col-md-12">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-group" id="accordion">
+          <%= render_with_hashtags_roadmap(roadmap.hashbody) %>
+          <div class="media pt-3 panel panel-default">
+              <div class="mr-5">
+              <%= link_to picture_for(roadmap.user), roadmap.user %>
+              <p><%= link_to roadmap.user.name, roadmap.user%></p>
+              </div>
+              <i class="mr-2 far fa-newspaper fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray panel-heading">
+              <h4 class="d-block panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= roadmap.id %>">タイトル</a>
+              </h4>
+                  <% if roadmap.title %>
+                  <%= roadmap.title %>
+                  <% end %>
+              </div>
+          </div>
+          </div>
+      </div>
+      <div id="collapse-<%= roadmap.id %>" class="panel-collapse collapse in col-md-3">
+          <div class="media my-3 p-3 bg-white rounded shadow-sm pt-3 panel-body">
+          <i class="mr-2 far fa-images fa-2x"></i>
+          <div class="pb-3 mb-0 lh-125 border-bottom border-gray">
+              <h4 class="d-block"> 表紙 </h4>
+                  <div class="row mr-4">
+                  <% if roadmap.picture? %>
+                      <%= image_tag roadmap.picture.thumb_roadmap.url, class: "img-fluid" %>
+                  <% end %>
+                  </div>
+          </div>
+          </div>
+      </div>
+      <div id="collapse-<%= roadmap.id %>" class="panel-collapse collapse in col-md-9">
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-body">
+          <div class="media pt-3">
+              <i class="mr-2 fas fa-bullseye fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <h4 class="d-block"> 目的 </h4>
+                  <% if roadmap.purpose %>
+                      <%= roadmap.purpose %>
+                  <% end %>
+              </div>
+          </div>
+          </div>
+          <div class="my-3 p-3 bg-white rounded shadow-sm panel-body">
+          <div class="media pt-3">
+              <i class="mr-2 fas fa-signal fa-2x"></i>
+              <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                  <h4 class="d-block"> 目標 </h4>
+                  <% if roadmap.target %>
+                      <%= roadmap.target %>
+                  <% end %>
+              </div>
+          </div>
+          </div>
+      </div>
+      <div class="col-md-12 my-3 text-right">
+      更新日：<%= roadmap.updated_at.to_s(:datetime) %>
+      <% if logged_in? %>
+          <% if current_user?(roadmap.user) || current_user.admin? %>
+              <%= link_to "独学中に設定する", learnig_user_roadmap_path(roadmap.user, roadmap.id), method: :patch,
+                                              data: { confirm: "こちらを独学中に設定しますか?" } %>
+              <%= link_to "編集する", edit_user_roadmap_path(roadmap.user, roadmap.id), method: :get,
+              data: { confirm: "こちらを編集しますか?" }, data: {"turbolinks" => false} %>
+              <%= link_to "削除する", user_roadmap_path(roadmap.user, roadmap.id), method: :delete,
+                                              data: { confirm: "本当に消しますか?" } %>
+          <% end %>
+      <% end %>    
+      </div>
+      </div>
+      <% if current_user?(roadmap.user) %>
+      <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+          <%= link_to "コメントを見る", user_roadmap_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+      </div>
+      <div class="roadmap__btn--create d-grid gap-2 d-md-flex justify-content-md-end" >
+          <%= link_to "ステップを記録する", user_roadmap_steps_path(roadmap.user, roadmap.id), class: "btn btn-sm btn-primary", data: {"turbolinks" => false} %>
+      </div>
+      <% end %>
+        <% roadmap.steps.each do |step| %>
+          <div>
+            <%= step.name %>
+          </div>
+            <% step.posts.each do |post| %>
+              <div>
+                <%= post.title %>
+              </div>
+            <% end %>
+        <% end %>
+  </div>
+<% end %>
+
 </div>
 </div>
 
